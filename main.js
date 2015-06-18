@@ -19,6 +19,7 @@ var mins    = 0;
 var seconds = 0;
 var millis  = 0;
 var lib = "A";
+var UUID = "";
 
 
 function Playback(sArray) {
@@ -49,14 +50,11 @@ function Playback(sArray) {
 	        }, x);
 	        return; 
 	    }
-
         while(Date.now() - startTime < item.time){
           playItBack(idx);
           return;
         }
-
-        //console.log(item);
-        playSound(item.key);
+        playSound(item.kit, item.key);
         playItBack(idx+1);
     }, 5);
   }
@@ -83,9 +81,10 @@ $('#stop').click(function(){
     SoundArray.sort(compare);
 		var trialLen = Date.now() - startTime;
 		if (SongLen < trialLen) {
-      SongLen =  trialLen;
+			SongLen =  trialLen;
       //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
-    }
+    	}
+    	publishCoBeat('stop', SongLen);
 		record = false;
 
 	}
@@ -238,16 +237,19 @@ $(window).keydown(function(e) {
     console.log("lib is set to " + lib);
   }
   else if(key >= 65 && key <= 90){
-      playSound(e.keyCode);
+      playSound(lib, e.keyCode);
       if (record){
         var elapsed = Date.now() - startTime;
         if (key in SOUNDS){
-          SoundArray.push({key:key, time:elapsed, kit:kit});
+	    	var beat = {key:key, time:elapsed, kit:lib};
+			SoundArray.push(beat);
+			publishCoBeat('beat', beat);
         }
       }
       $(".active").css("color",getRandomColor());
   }
-  else if (key == 32) {
+  else if (key == 32) { // Space Bar
+	e.preventDefault();
     if (record || play){
         if (record){ // If record? If first record?
           SoundArray.sort(compare);
@@ -256,10 +258,12 @@ $(window).keydown(function(e) {
             SongLen =  trialLen;
             //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
           }
+          publishCoBeat('stop', SongLen);
           record = false;
         }
       play = false;
       clearTimeout(timex);
+      return;
     }
     else{
       hours   = 0;
@@ -316,14 +320,14 @@ var SOUNDS = {
   ' ':""
  };
 
-function playSound(sound){
+function playSound(kit, sound){
   if (typeof(sound)=="number"){
     key = String.fromCharCode(sound).toLowerCase();
   } 
   else {
     key = sound;
   }
-  new Audio(lib + SOUNDS[key]).play();
+  new Audio(kit + SOUNDS[key]).play();
 }
 
 // Handle the canvas
@@ -414,3 +418,50 @@ function getRandomColor() {
 }
 
 
+///////////////////////////
+// PubNub Collaborations //
+///////////////////////////
+UUID = PUBNUB.uuid();
+
+pubnub = PUBNUB({                          
+    publish_key   : 'pub-c-f83b8b34-5dbc-4502-ac34-5073f2382d96',
+    subscribe_key : 'sub-c-34be47b2-f776-11e4-b559-0619f8945a4f',
+    uuid: UUID
+});
+
+function pubInit(){
+	pubnub.subscribe({                                     
+        channel : "cobeats",
+        message : function(m){
+	        if (m.uuid != UUID){
+		        console.log(m.uuid + " " + pubnub.uuid);
+				switch(m.type){
+				case "beat":
+					SoundArray.push(m.data);
+					SoundArray.sort(compare);
+					break;	
+				case "stop":
+					if (SongLen < m.data){  // Publish SongLen, if different get everyone				
+						SongLen = m.data;	//  to use the longest song version.
+					} else if (SongLen != m.data) {
+						publishCoBeat('stop', SongLen);
+					}	
+					break;
+				}
+		        
+	        }
+        },
+        connect: function(m){
+	        console.log(m);
+        }
+    });
+}
+pubInit();
+
+function publishCoBeat(type, data){
+	pubnub.publish({
+	    channel: 'cobeats',        
+	    message: {type:type, data:data, uuid:UUID},
+	    callback : function(m){console.log(m)}
+	});
+}
