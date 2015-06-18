@@ -6,6 +6,9 @@ html {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
 }
+body{
+  height: 100vh;
+}
 
 h2 {
   position: absolute;
