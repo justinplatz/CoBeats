@@ -6,9 +6,10 @@ $(document).ready(function() {
   });
 });
 
-
 // Instantiate Global Variables
 var SoundArray = [];
+var SongArray = [];
+var SongMap = {};
 var SongLen = 1000;
 var kit     = 'A';
 var record  = false;
@@ -21,8 +22,7 @@ var millis  = 0;
 var lib = "A";
 var UUID = "";
 
-
-function Playback(sArray) {
+function Playback() {
   if (play) {
 	  play = false;
 	  return;
@@ -35,11 +35,11 @@ function Playback(sArray) {
 
   function playItBack(idx){
     setTimeout(function(){
-        var item = sArray[idx];
+        var item = SongArray[idx];
         if (!play){
 	        return;
         }
-        if (idx >= sArray.length) { 
+        if (idx >= SongArray.length) { 
 	        var x = SongLen - (Date.now()-startTime);
 	        console.log(x);
 	        setTimeout(function(){
@@ -72,29 +72,28 @@ $('#start').click(function(){
 	$('#millis').html('00');
 	record  = true;
 	startTime = Date.now();
-	Playback(SoundArray);
+	Playback();
 	startTimer();
 });
 
 $('#stop').click(function(){
 	if (record){ // If record? If first record?
-    SoundArray.sort(compare);
-		var trialLen = Date.now() - startTime;
-		if (SongLen < trialLen) {
-			SongLen =  trialLen;
-      //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
-    	}
+    	SoundArray.sort(compare);
+    	makeSongArray();
+		SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
     	publishCoBeat('stop', SongLen);
+    	publishCoBeat('riff', SongArray);
 		record = false;
 
 	}
 	play = false;
-	clearTimeout(timex);
+	stopClock();
+	makeSongArray();
 });
 
 $('#reset').click(function(){
 	if (record || play) { return; }
-	clearTimeout(timex);
+	stopClock();
 	record  = false;
 	startTime = 0;
 	hours   = 0;
@@ -107,8 +106,31 @@ $('#reset').click(function(){
 	
 	SoundArray.length = 0;
 	SongLen = 1000;
+	publishCoBeat('stop', SongLen);
+	publishCoBeat('riff', SoundArray);
 	clearCanvas();
 });
+
+function stopClock(){
+	if (typeof timex !== "undefined"){
+		clearTimeout(timex);
+	}
+}
+
+function makeSongArray(){
+	var song = [];
+	for(var i=0; i<SoundArray.length; i++){
+		song.push(SoundArray[i]);
+	}
+	for(var key in SongMap){
+		var beats = SongMap[key];
+		for (var i=0; i<beats.length; i++){
+			song.push(beats[i]);
+		}	
+	}
+	song.sort(compare);
+	SongArray = song;
+}
 
 function compare(a,b) {
   if (a.time < b.time)
@@ -253,16 +275,14 @@ $(window).keydown(function(e) {
     if (record || play){
         if (record){ // If record? If first record?
           SoundArray.sort(compare);
-          var trialLen = Date.now() - startTime;
-          if (SongLen < trialLen) {
-            SongLen =  trialLen;
-            //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
-          }
+          makeSongArray();
+		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
           publishCoBeat('stop', SongLen);
+          publishCoBeat('riff', SongArray);
           record = false;
         }
       play = false;
-      clearTimeout(timex);
+      stopClock();
       return;
     }
     else{
@@ -274,7 +294,7 @@ $(window).keydown(function(e) {
       $('#millis').html('00');
       record  = true;
       startTime = Date.now();
-      Playback(SoundArray);
+      Playback();
       startTimer();
     }
   }
@@ -364,24 +384,24 @@ var playBar = {
 };
 
 var mySong = {
-	beats: SoundArray,
-	color: '#66CC99',
+	beats: 1,
+	colors: ['#66CC99','#F00','#0F0','#00F'],
 	radius: 10,
 	getX : function(beat){
-		return beat.time/(SongLen*1.0) * canvas.width;
+		return beat.time/SongLen * canvas.width;
 	},
-	getY : function(){
-		return canvas.height/2;
+	getY : function(pos){
+		return canvas.height/(this.beats+1) * (pos+1);
 	},
 	playing: function(beat){
 		return (playBar.getX() > this.getX(beat)-this.radius && playBar.getX() < this.getX(beat)+this.radius);
 	},
-	drawBeat: function(beat) {
+	drawBeat: function(beat, pos) {
 		var xVal = this.getX(beat);
-		var yVal = this.getY();
+		var yVal = this.getY(pos);
 		var playing = this.playing(beat);
 		var rad  = playing ? this.radius+3 : this.radius;
-		var col  = playing ? 'yellow' : this.color;
+		var col  = playing ? 'yellow' : this.colors[pos];
 		ctx.beginPath();
 		ctx.arc(xVal, yVal, rad, 0, Math.PI*2, false);
 		ctx.fillStyle = col;
@@ -389,8 +409,15 @@ var mySong = {
 		ctx.closePath();
 	},
 	draw: function(){
-		for (var i=0; i < this.beats.length; i++){
-			this.drawBeat(this.beats[i]);
+		this.beats = Object.keys(SongMap).length + 1;
+		var song = [SoundArray];
+		for (var uuid in SongMap){
+			song.push(SongMap[uuid]);
+		}
+		for (var i=0; i < song.length; i++){
+			for (var j=0; j < song[i].length; j++){
+				this.drawBeat(song[i][j], i);
+			}	
 		}
 	}
 };
@@ -434,21 +461,27 @@ function pubInit(){
         channel : "cobeats",
         message : function(m){
 	        if (m.uuid != UUID){
-		        console.log(m.uuid + " " + pubnub.uuid);
 				switch(m.type){
 				case "beat":
-					SoundArray.push(m.data);
-					SoundArray.sort(compare);
+					if (m.uuid in SongMap){
+						SongMap[m.uuid].push(m.data);
+						SongMap[m.uuid].sort(compare);
+					} else {
+						SongMap[m.uuid] = [m.data];
+					}
 					break;	
+				case "riff":
+					SongMap[m.uuid] = m.data;
+					break;
 				case "stop":
 					if (SongLen < m.data){  // Publish SongLen, if different get everyone				
-						SongLen = m.data;	//  to use the longest song version.
+						SongLen = m.data;		 //  to use the longest song version.
 					} else if (SongLen != m.data) {
 						publishCoBeat('stop', SongLen);
 					}	
+					makeSongArray();
 					break;
 				}
-		        
 	        }
         },
         connect: function(m){
