@@ -64,12 +64,12 @@ function Playback(sArray) {
 
 // Button Click Functions
 $('#start').click(function(){
-	if (record) return;
+	if (record || play) return;
 	hours   = 0;
 	mins    = 0;
 	seconds = 0;
-	$('#hours','#mins').html('00:');
-	$('#seconds').html('00:');
+	$('#mins').html('00:');
+	$('#seconds').html('00.');
 	$('#millis').html('00');
 	record  = true;
 	startTime = Date.now();
@@ -97,7 +97,7 @@ $('#reset').click(function(){
 	mins    = 0;
 	seconds = 0;
 	
-	$('#hours','#mins').html('00:');
+	$('#mins').html('00:');
 	$('#seconds').html('00:');
 	$('#millis').html('00');
 	
@@ -134,12 +134,6 @@ function startTimer(){
         mins++;
         if(mins>59) {
           mins=0;
-          hours++;
-          if(hours <10) {
-            $("#hours").text('0'+hours+':')
-          } 
-          else 
-            $("#hours").text(hours+':');
         }                   
         if(mins<10){                     
           $("#mins").text('0'+mins+':');
@@ -182,32 +176,32 @@ $(window).keyup(function(e) {
 
 // Play sounds on button press
 var SOUNDS = {
-  'q':"sounds/kick.wav",
-  'w':"sounds/snare.wav", 
-  'e':"sounds/clap.wav", 
-  'r':"sounds/kick2.wav", 
-  't':"sounds/snare2.wav", 
-  'y':"sounds/closedhat.wav", 
-  'u':"sounds/snap.wav", 
-  'i':"sounds/clapsnare.wav", 
-  'o':"sounds/openhat.wav", 
-  'p':"sounds/",
-  'a':"sounds/c-chord.mp3",
-  's':"sounds/d-chord.mp3",
-  'd':"sounds/organ_hi.mp3",
-  'f':"sounds/organ_low.mp3",
-  'g':"sounds/softmaj.mp3",
-  'h':"sounds/softmin.mp3",
-  'j':"sounds/chord3.wav",
-  'k':"sounds/chord4.wav",
-  'l':"sounds/oc4.wav",
-  'z':"sounds/oc8.wav",
-  'x':"sounds/",
-  'c':"sounds/",
-  'v':"sounds/",
-  'b':"sounds/",
-  'n':"sounds/",
-  'm':"sounds/",
+  'q':"A/bubbles.mp3",
+  'w':"A/clay.mp3", 
+  'e':"A/confetti.mp3", 
+  'r':"A/corona.mp3", 
+  't':"A/dotted-spiral.mp3", 
+  'y':"A/flash-1.mp3", 
+  'u':"A/flash-2.mp3", 
+  'i':"A/flash-3.mp3", 
+  'o':"A/glimmer.mp3", 
+  'p':"A/moon.mp3",
+  'a':"A/pinwheel.mp3",
+  's':"A/piston-1.mp3",
+  'd':"A/piston-2.mp3",
+  'f':"A/piston-3.mp3",
+  'g':"A/prism-1.mp3",
+  'h':"A/prism-2.mp3",
+  'j':"A/prism-3.mp3",
+  'k':"A/splits.mp3",
+  'l':"A/squiggle.mp3",
+  'z':"A/strike.mp3",
+  'x':"A/suspension.mp3",
+  'c':"A/timer.mp3",
+  'v':"A/ufo.mp3",
+  'b':"A/veil.mp3",
+  'n':"A/wipe.mp3",
+  'm':"A/zig-zag.mp3",
   ' ':""
  };
 

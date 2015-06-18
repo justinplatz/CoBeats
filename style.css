@@ -35,7 +35,6 @@ span:hover {
 
 .key-wrapper {
   text-align: center;
-  margin-top: 10em;
 }
 
 .row {text-align: center;}
@@ -120,13 +119,20 @@ button:focus .key{
 
 }
 
+#seekBar {
+  width:100vw; 
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
 
+#canvas {
+}
 
 #timer {
   font-size:4em;
   margin:0 auto;
   width:1000px;
-  margin-bottom: 1em;
   text-align: center;
 }
 
@@ -141,35 +147,6 @@ button:focus .key{
   font-size:24px;
   color: white;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .container {
  

@@ -28,54 +28,109 @@
 	</div>
 	
 	<div id="timer">
-		<span id="hours">00:</span>
 		<span id="mins">00:</span>
-		<span id="seconds">00:</span> 
+		<span id="seconds">00.</span> 
 		<span id="millis">00</span>  
 	</div>
 	
-	<div style="width:100vw; text-align: center;"><canvas id="canvas" width="800" height="100" style="margin: 0 auto;"></canvas></div>
+	<div id="seekBar">
+    <canvas id="canvas" width="800" height="100" style="margin: 0 auto;"></canvas>
+  </div>
 	
-	<div class="key-wrapper" class="display-animation" style="text-align:center">
-	<ul class="row">
-		<button type="button" onclick="playSound('q')"> <li class="key k81">q</li></button>
-		<button type="button" onclick="playSound('w')"> <li class="key k87">w</li></button>
-		<button type="button" onclick="playSound('e')"><li class="key k69">e</li></button>
-		<button type="button" onclick="playSound('r')"><li class="key k82">r</li></button>
-		<button type="button" onclick="playSound('t')"><li class="key k84">t</li></button>
-		<button type="button" onclick="playSound('y')"><li class="key k89">y</li></button>
-		<button type="button" onclick="playSound('u')"><li class="key k85">u</li></button>
-		<button type="button" onclick="playSound('i')"><li class="key k73">i</li></button>
-		<button type="button" onclick="playSound('o')"><li class="key k79">o</li></button>
-		<button type="button" onclick="playSound('p')"><li class="key k80">p</li></button>
-	</ul>
-	
-	<ul class="row">
-		<li class="key k65">a</li>
-		<li class="key k83">s</li>
-		<li class="key k68">d</li>
-		<li class="key k70">f</li>
-		<li class="key k71">g</li>
-		<li class="key k72">h</li>
-		<li class="key k74">j</li>
-		<li class="key k75">k</li>
-		<li class="key k76">l</li>
-	</ul>
-	
-	<ul class="row">
-		<li class="key k90">z</li>
-		<li class="key k88">x</li>
-		<li class="key k67">c</li>
-		<li class="key k86">v</li>
-		<li class="key k66">b</li>
-		<li class="key k78">n</li>
-		<li class="key k77">m</li>
-	</ul>
-	
-	<ul class="row">
-		<li class="key k32"></li>
-	</ul>
-	</div>
+<div class="key-wrapper" class="display-animation" style="text-align:center">
+  <ul class="row">
+
+    <button type="button" onclick="playSound('q')" class = "move" style="-webkit-animation-delay: .3s;animation-delay: .3s;"> <li class="key k81">q</li>
+    </button>
+
+    <button type="button" onclick="playSound('w')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;"> <li class="key k87">w</li>
+    </button>
+
+    <button type="button" onclick="playSound('e')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;"><li class="key k69">e</li>
+    </button>
+
+    <button type="button" onclick="playSound('r')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;"><li class="key k82">r</li>
+    </button>
+
+    <button type="button" onclick="playSound('t')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;"><li class="key k84">t</li>
+    </button>
+
+    <button type="button" onclick="playSound('y')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;"><li class="key k89">y</li>
+    </button>
+
+    <button type="button" onclick="playSound('u')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;"><li class="key k85">u</li>
+   </button>
+
+    <button type="button" onclick="playSound('i')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;"><li class="key k73">i</li>
+    </button>
+
+    <button type="button" onclick="playSound('o')" class = "move" style="-webkit-animation-delay: 1.1s;animation-delay: 1.1s;"><li class="key k79">o</li>
+    </button>
+
+    <button type="button" onclick="playSound('p')" class = "move" style="-webkit-animation-delay: 1.2s;animation-delay: 1.2s;"><li class="key k80">p</li>
+    </button>
+
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound('a')" class = "move" style="-webkit-animation-delay: .3s;animation-delay: .3s;"><li class="key k65">a</li>
+    </button>
+    <button type="button" onclick="playSound('s')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;">
+    <li class="key k83">s</li>
+    </button>
+    <button type="button" onclick="playSound('d')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;">
+    <li class="key k68">d</li>
+    </button>
+    <button type="button" onclick="playSound('f')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;">
+    <li class="key k70">f</li>
+    </button>
+    <button type="button" onclick="playSound('g')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k71">g</li>
+    </button>
+    <button type="button" onclick="playSound('h')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;">
+    <li class="key k72">h</li>
+    </button>
+    <button type="button" onclick="playSound('j')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;">
+    <li class="key k74">j</li>
+    </button>
+    <button type="button" onclick="playSound('k')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;">
+    <li class="key k75">k</li>
+    </button>
+    <button type="button" onclick="playSound('l')" class = "move" style="-webkit-animation-delay: 1.1s;animation-delay: 1.1s;">
+    <li class="key k76">l</li>
+    </button>
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound('z')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;">
+    <li class="key k90">z</li>
+    </button>
+    <button type="button" onclick="playSound('x')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;">
+    <li class="key k88">x</li>
+    </button>
+    <button type="button" onclick="playSound('c')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;">
+    <li class="key k67">c</li>
+    </button>
+    <button type="button" onclick="playSound('v')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k86">v</li>
+    </button>
+    <button type="button" onclick="playSound('b')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;">
+    <li class="key k66">b</li>
+    </button>
+    <button type="button" onclick="playSound('n')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;">
+    <li class="key k78">n</li>
+    </button>
+    <button type="button" onclick="playSound('m')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;">
+    <li class="key k77">m</li>
+    </button>
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound(' ')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k32"></li>
+    </button>
+  </ul>
+</div>
 
 	<div id="audios">
 	
@@ -92,9 +147,5 @@
 	  <div class="hexagon yellow"></div>
 	</div>
 	<script src="main.js"></script>
-	<script type="text/javascript">
-		
-		
-	</script>
 </body>
 </html>
