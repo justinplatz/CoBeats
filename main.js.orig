@@ -418,6 +418,7 @@ function getRandomColor() {
 }
 
 
+<<<<<<< HEAD
 
 
 
@@ -468,6 +469,7 @@ var globalModal = $('.global-modal');
       $( globalModal ).toggleClass('global-modal-show');
     });
 
+=======
 ///////////////////////////
 // PubNub Collaborations //
 ///////////////////////////
@@ -515,3 +517,4 @@ function publishCoBeat(type, data){
 	    callback : function(m){console.log(m)}
 	});
 }
+>>>>>>> 6f5bb6466469b09fdc5c7e457ec571e7bbcd7271
