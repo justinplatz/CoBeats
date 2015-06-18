@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
-
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>        
 
@@ -16,14 +16,55 @@
   	Parse.initialize("8h7EqFtIOzritaD2lrssaAq0DdXpdwk83afH1KUS", "HEO3lR1rgo2NSW6rjiz6IzaNsFDIOJ8hL8QiAyGr");
   </script>
 
-	<div id="controls">
+<!-- 	<div id="controls">
 		<button id="start">Start</button>
 		<button id="stop">Stop</button>
 		<button id="reset">Reset</button>
 		<button id="#" onClick="saveToParse(SoundArray)">Save</button>
 		<button id="#" onClick="Playback(SoundArray)">Play</button>
 	</div>
-	
+	 -->
+
+
+<div class='snav' id="controls" class='en'>
+  <ul>
+    <li>
+      <a href='#'>
+      
+        <button id="start"><i class="fa fa-microphone"></i>Record</button>
+      </a>
+    </li>
+      <li>
+      <a href='#'>
+          <button id="#" onClick="Playback(SoundArray)"><i class="fa fa-play"></i>Play</button>
+      </a>
+    </li>
+     <li>
+      <a href='#'>
+          <button id="stop"><i class="fa fa-stop"></i>Stop</button>
+      </a>
+    </li>
+ 
+     <li>
+      <a href='#'>
+          <button id="reset"><i class="fa fa-times"></i>Reset</button>
+      </a>
+    </li>
+
+    <li>
+      <a href='#'>
+          <button id="#" onClick="saveToParse(SoundArray)"><i class="fa fa-cloud"></i>Save</button>
+      </a>
+    </li> 
+  
+  </ul>
+  
+</div>
+  
+
+
+
+
 	<div id="timer">
 		<span id="mins">00:</span>
 		<span id="seconds">00.</span> 

@@ -19,7 +19,6 @@ h2 {
 
 span {
   padding: 0 0 2px;
-  border-bottom: 1px dotted #444;
   cursor: pointer;
   
   -webkit-transition: .5s;
@@ -136,17 +135,7 @@ button:focus .key{
   text-align: center;
 }
 
-#controls {
-  margin:0 auto;
-  width:600px; 
-  margin-bottom: 1em;
-  text-align: center;
-}
 
-#controls button {
-  font-size:24px;
-  color: white;
-}
 
 .container {
  
@@ -342,3 +331,101 @@ button:focus .key{
     opacity: 0.5;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+
+/* LTR CSS */
+.snav.en {
+  left: 0;
+  text-align: left;
+}
+.snav.en  li span {
+  left: -100px;
+}
+.snav.en li a:hover span {
+  left: 35px;
+}
+
+/* RTL CSS */
+.snav.ar {
+  right: 0;
+  text-align: right;
+}
+.snav.ar  li span {
+  right: -100px;
+}
+.snav.ar li a:hover span {
+  right: 35px;
+}
+
+/* main SideNav.css styles */
+.snav {
+  position: fixed;
+  top:20%;
+  z-index: 9999;
+  font-size: 3em;
+  font-family: 'Open Sans', sans-serif;
+}
+.snav ul {
+  list-style: none;
+}
+.snav * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: .2s;
+     -moz-transition: .2s;
+       -o-transition: .2s;
+      -ms-transition: .2s;
+          transition: .2s;
+}
+
+.snav button{
+  font-size: 24px;
+  color: #444;
+}
+
+.snav button:hover {
+  color: #fd0;
+}
+.snav li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.snav .fa {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+  
+}
+
+
