@@ -229,7 +229,7 @@ $(window).keydown(function(e) {
       $('#mins').html('00:');
       $('#seconds').html('00.');
       $('#millis').html('00');
-      record  = true;1
+      record  = true;
       startTime = Date.now();
       Playback(SoundArray);
       startTimer();
@@ -248,32 +248,32 @@ $(window).keyup(function(e) {
 
 // Play sounds on button press
 var SOUNDS = {
-  'q':"/bubbles.mp3",
+  'q':"/flash-1.mp3",
   'w':"/clay.mp3", 
-  'e':"/confetti.mp3", 
-  'r':"/corona.mp3", 
-  't':"/dotted-spiral.mp3", 
-  'y':"/flash-1.mp3", 
-  'u':"/flash-2.mp3", 
-  'i':"/flash-3.mp3", 
+  'e':"/moon.mp3", 
+  'r':"/piston-1.mp3", 
+  't':"/timer.mp3", 
+  'y':"/suspension.mp3", 
+  'u':"/prism-1.mp3", 
+  'i':"/squiggle.mp3", 
   'o':"/glimmer.mp3", 
-  'p':"/moon.mp3",
-  'a':"/pinwheel.mp3",
-  's':"/piston-1.mp3",
-  'd':"/piston-2.mp3",
-  'f':"/piston-3.mp3",
-  'g':"/prism-1.mp3",
-  'h':"/prism-2.mp3",
-  'j':"/prism-3.mp3",
-  'k':"/splits.mp3",
-  'l':"/squiggle.mp3",
-  'z':"/strike.mp3",
-  'x':"/suspension.mp3",
-  'c':"/timer.mp3",
-  'v':"/ufo.mp3",
-  'b':"/veil.mp3",
-  'n':"/wipe.mp3",
-  'm':"/zig-zag.mp3",
+  'p':"/dotted-spiral.mp3" ,
+  'a':"/flash-2.mp3",
+  's':"/veil.mp3",
+  'd': "/ufo.mp3",
+  'f':"/piston-2.mp3",
+  'g':"/bubbles.mp3",
+  'h':"/strike.mp3",
+  'j':"/prism-2.mp3"  ,
+  'k':"/pinwheel.mp3",
+  'l':"/zig-zag.mp3",
+  'z':,"/flash-3.mp3"
+  'x':"/wipe.mp3",
+  'c':"/splits.mp3" ,
+  'v':"/piston-3.mp3",
+  'b':"/corona.mp3",
+  'n':"/confetti.mp3",
+  'm':"/prism-3.mp3",
   ' ':""
  };
 
@@ -298,7 +298,7 @@ canvas.height = H;
 canvas.width  = W;
 
 var playBar = {
-	color:'red',
+	color:'#F64747',
 	getX : function(){
 		var elapsed = 0;
 		if (record || play) {
@@ -322,7 +322,7 @@ var playBar = {
 
 var mySong = {
 	beats: SoundArray,
-	color: 'green',
+	color: '#66CC99',
 	radius: 10,
 	getX : function(beat){
 		return beat.time/(SongLen*1.0) * canvas.width;
