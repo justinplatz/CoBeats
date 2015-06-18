@@ -18,6 +18,7 @@ var hours   = 0;
 var mins    = 0;
 var seconds = 0;
 var millis  = 0;
+var lib = "A";
 
 
 function Playback(sArray) {
@@ -79,10 +80,14 @@ $('#start').click(function(){
 
 $('#stop').click(function(){
 	if (record){ // If record? If first record?
+    SoundArray.sort(compare);
 		var trialLen = Date.now() - startTime;
-		if (SongLen < trialLen) SongLen =  trialLen;
+		if (SongLen < trialLen) {
+      SongLen =  trialLen;
+      //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
+    }
 		record = false;
-		SoundArray.sort(compare);
+
 	}
 	play = false;
 	clearTimeout(timex);
@@ -160,13 +165,76 @@ function startTimer(){
 $(window).keydown(function(e) {
   key = (e.keyCode) ? e.keyCode : e.which;
   $('.key.k' + key).addClass('active');
-  playSound(e.keyCode);
-  if (record){
-    var elapsed = Date.now() - startTime;
-    if (key in SOUNDS){
-	    SoundArray.push({key:key, time:elapsed, kit:kit});
+
+  if(key >= 48 && key <=57){
+    switch(key - 48){
+      // case 0:
+      //   lib = "Z";
+      //   break;  
+      case 1:
+        lib = "A";
+        break;
+      case 2:
+        lib = "B";
+        break;
+      case 3:
+        lib = "C";
+        break;
+      case 4:
+        lib = "D";
+        break;
+      case 5:
+        lib = "E";
+        break;
+      case 6:
+        lib = "F";
+        break;
+    }
+    console.log("lib is set to " + lib);
+  }
+  else if(key >= 65 && key <= 90){
+      playSound(e.keyCode);
+      if (record){
+        var elapsed = Date.now() - startTime;
+        if (key in SOUNDS){
+          SoundArray.push({key:key, time:elapsed, kit:kit});
+        }
+      }
+      $(".active").css("color",getRandomColor());
+
+
+  }
+  else if (key == 32) {
+    if (record || play){
+        if (record){ // If record? If first record?
+          SoundArray.sort(compare);
+          var trialLen = Date.now() - startTime;
+          if (SongLen < trialLen) {
+            SongLen =  trialLen;
+            //if (SoundArray.length > 0 && SoundArray[SoundArray.length-1]){}
+          }
+          record = false;
+        }
+      play = false;
+      clearTimeout(timex);
+    }
+    else{
+      hours   = 0;
+      mins    = 0;
+      seconds = 0;
+      $('#mins').html('00:');
+      $('#seconds').html('00.');
+      $('#millis').html('00');
+      record  = true;1
+      startTime = Date.now();
+      Playback(SoundArray);
+      startTimer();
     }
   }
+  else
+    console.log("Invalid key");
+
+ 
 });
 
 $(window).keyup(function(e) {
@@ -176,32 +244,32 @@ $(window).keyup(function(e) {
 
 // Play sounds on button press
 var SOUNDS = {
-  'q':"A/bubbles.mp3",
-  'w':"A/clay.mp3", 
-  'e':"A/confetti.mp3", 
-  'r':"A/corona.mp3", 
-  't':"A/dotted-spiral.mp3", 
-  'y':"A/flash-1.mp3", 
-  'u':"A/flash-2.mp3", 
-  'i':"A/flash-3.mp3", 
-  'o':"A/glimmer.mp3", 
-  'p':"A/moon.mp3",
-  'a':"A/pinwheel.mp3",
-  's':"A/piston-1.mp3",
-  'd':"A/piston-2.mp3",
-  'f':"A/piston-3.mp3",
-  'g':"A/prism-1.mp3",
-  'h':"A/prism-2.mp3",
-  'j':"A/prism-3.mp3",
-  'k':"A/splits.mp3",
-  'l':"A/squiggle.mp3",
-  'z':"A/strike.mp3",
-  'x':"A/suspension.mp3",
-  'c':"A/timer.mp3",
-  'v':"A/ufo.mp3",
-  'b':"A/veil.mp3",
-  'n':"A/wipe.mp3",
-  'm':"A/zig-zag.mp3",
+  'q':"/bubbles.mp3",
+  'w':"/clay.mp3", 
+  'e':"/confetti.mp3", 
+  'r':"/corona.mp3", 
+  't':"/dotted-spiral.mp3", 
+  'y':"/flash-1.mp3", 
+  'u':"/flash-2.mp3", 
+  'i':"/flash-3.mp3", 
+  'o':"/glimmer.mp3", 
+  'p':"/moon.mp3",
+  'a':"/pinwheel.mp3",
+  's':"/piston-1.mp3",
+  'd':"/piston-2.mp3",
+  'f':"/piston-3.mp3",
+  'g':"/prism-1.mp3",
+  'h':"/prism-2.mp3",
+  'j':"/prism-3.mp3",
+  'k':"/splits.mp3",
+  'l':"/squiggle.mp3",
+  'z':"/strike.mp3",
+  'x':"/suspension.mp3",
+  'c':"/timer.mp3",
+  'v':"/ufo.mp3",
+  'b':"/veil.mp3",
+  'n':"/wipe.mp3",
+  'm':"/zig-zag.mp3",
   ' ':""
  };
 
@@ -212,7 +280,7 @@ function playSound(sound){
   else {
     key = sound;
   }
-  new Audio(SOUNDS[key]).play();
+  new Audio(lib + SOUNDS[key]).play();
 }
 
 // Handle the canvas
@@ -291,3 +359,15 @@ function update() {
 }
 
 setInterval(update, 1000/60);
+
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
