@@ -1,0 +1,364 @@
+html {
+  background: #222;
+
+  color: #444;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+  position: absolute;
+  margin: -200px 0 0;
+  top: 50%;
+  width: 100%;
+  
+  color: #444;
+  text-align: center;
+}
+
+span {
+  padding: 0 0 2px;
+  border-bottom: 1px dotted #444;
+  cursor: pointer;
+  
+  -webkit-transition: .5s;
+		 -moz-transition: .5s;
+			 -o-transition: .5s;
+			-ms-transition: .5s;
+			  	transition: .5s;
+}
+
+span:hover {
+  color: #fd0;
+}
+
+.key-wrapper {
+  text-align: center;
+  margin-top: 10em;
+}
+
+.row {text-align: center;}
+
+.key {
+  margin: 3px 1px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  display: inline-block;
+
+  line-height: 52px;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  
+ 	-webkit-transition: .5s;
+		 -moz-transition: .5s;
+			 -o-transition: .5s;
+			-ms-transition: .5s;
+			  	transition: .5s;
+}
+
+.k32 {
+  width: 346px;
+}
+
+.active {
+  border: 2px solid #fd0;
+  color: #fd0;
+  
+  -webkit-transition: 0s;
+		 -moz-transition: 0s;
+			-ms-transition: 0s;
+			  	transition: 0s;
+}
+
+
+audio {
+  visibility: hidden;
+}
+
+button{
+  background: transparent;
+  border: none;
+  margin: 3px 1px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.41);
+      border:3px solid transparent;
+      
+    
+      animation: pulse 1s linear infinite alternate;
+      -webkit-animation: pulse 1s linear infinite alternate;
+}
+
+  @-webkit-keyframes pulse {
+      100% {
+        transform: translateY(6.9px); 
+      } 
+    }
+
+    @keyframes pulse {
+      100% {
+        transform: translateY(6.9px); 
+      } 
+    }
+button:focus{
+  outline: 0;
+}
+
+button:focus .key{
+  border: 2px solid #fd0;
+  color: #fd0;
+  
+  -webkit-transition: 0s;
+  -moz-transition: 0s;
+  -ms-transition: 0s;
+  transition: 0s;
+
+}
+
+
+
+#timer {
+  font-size:4em;
+  margin:0 auto;
+  width:1000px;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#controls {
+  margin:0 auto;
+  width:600px; 
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#controls button {
+  font-size:24px;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+ 
+}
+
+.hexagon {
+  opacity: 0.5;
+  width: 200px;
+  height: 115px;
+  position: absolute;
+}
+.hexagon:before {
+  content: "";
+  position: absolute;
+  top: -57px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-right: 100px solid transparent;
+  border-bottom: 57px solid;
+  border-left: 100px solid transparent;
+}
+.hexagon:after {
+  content: "";
+  position: absolute;
+  bottom: -57px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 57px solid;
+  border-right: 100px solid transparent;
+  border-left: 100px solid transparent;
+}
+
+.green {
+  top: 144px;
+  left: 100px;
+  background: #4eb96e;
+  -webkit-animation: green-animation 5s infinite ease-in-out;
+          animation: green-animation 5s infinite ease-in-out;
+  border-color: #4eb96e transparent;
+}
+.green:before, .green:after {
+  border-color: #4eb96e transparent;
+}
+
+.red {
+  top: 57px;
+  left: 50px;
+  background: #f05b5a;
+  -webkit-animation: red-animation 4s infinite ease-in-out;
+          animation: red-animation 4s infinite ease-in-out;
+}
+.red:before, .red:after {
+  border-color: #f05b5a transparent;
+}
+
+.blue {
+  top: 144px;
+  left: 200px;
+  background: #2b95bf;
+  -webkit-animation: blue-animation 5s infinite ease-in-out;
+          animation: blue-animation 5s infinite ease-in-out;
+}
+.blue:before, .blue:after {
+  border-color: #2b95bf transparent;
+}
+
+.purple {
+  top: 230px;
+  left: 50px;
+  background: #955ba4;
+  -webkit-animation: purple-animation 5s infinite step-start;
+          animation: purple-animation 5s infinite step-start;
+}
+.purple:before, .purple:after {
+  border-color: #955ba4 transparent;
+}
+
+.yellow {
+  top: 229px;
+  left: 150px;
+  background: #efc31a;
+  -webkit-animation: yellow-animation 5s infinite ease-in-out;
+          animation: yellow-animation 5s infinite ease-in-out;
+}
+.yellow:before, .yellow:after {
+  border-color: #efc31a transparent;
+}
+
+@-webkit-keyframes red-animation {
+  0% {
+    opacity: 0;
+    top: 144px;
+    left: 0;
+  }
+  55% {
+    opacity: 0.5;
+    top: 57px;
+    left: 50px;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes red-animation {
+  0% {
+    opacity: 0;
+    top: 144px;
+    left: 0;
+  }
+  55% {
+    opacity: 0.5;
+    top: 57px;
+    left: 50px;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes purple-animation {
+  0%, 80% {
+    top: 230px;
+    left: 50px;
+  }
+  20% {
+    top: 57px;
+    left: 150px;
+  }
+}
+@keyframes purple-animation {
+  0%, 80% {
+    top: 230px;
+    left: 50px;
+  }
+  20% {
+    top: 57px;
+    left: 150px;
+  }
+}
+@-webkit-keyframes blue-animation {
+  0%, 100% {
+    opacity: 0;
+  }
+  30%, 40% {
+    opacity: 0.5;
+  }
+}
+@keyframes blue-animation {
+  0%, 100% {
+    opacity: 0;
+  }
+  30%, 40% {
+    opacity: 0.5;
+  }
+}
+@-webkit-keyframes green-animation {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.5;
+  }
+}
+@keyframes green-animation {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.5;
+  }
+}
+@-webkit-keyframes yellow-animation {
+  0%, 30%, 100% {
+    opacity: 0;
+  }
+  50%, 80% {
+    opacity: 0.5;
+  }
+}
+@keyframes yellow-animation {
+  0%, 30%, 100% {
+    opacity: 0;
+  }
+  50%, 80% {
+    opacity: 0.5;
+  }
+}
