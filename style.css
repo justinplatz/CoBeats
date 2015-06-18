@@ -432,3 +432,259 @@ button:focus .key{
 }
 
 
+/* ****************************************** */
+/* LTR CSS */
+.rnav.en {
+  right: 0;
+  text-align: right;
+}
+.rnav.en  li span {
+  right: -100px;
+}
+.rnav.en li a:hover span {
+  right: 35px;
+}
+
+/* RTL CSS */
+.rnav.ar {
+  left: 0;
+  text-align: left;
+}
+.rnav.ar  li span {
+  left: -100px;
+}
+.rnav.ar li a:hover span {
+  left: 35px;
+}
+
+/* main SideNav.css styles */
+.rnav {
+  position: fixed;
+  top:20%;
+  z-index: 9999;
+  font-size: 3em;
+  font-family: 'Open Sans', sans-serif;
+}
+.rnav ul {
+  list-style: none;
+}
+.rnav * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: .2s;
+     -moz-transition: .2s;
+       -o-transition: .2s;
+      -ms-transition: .2s;
+          transition: .2s;
+}
+
+.rnav button{
+  font-size: 24px;
+  color: #444;
+}
+
+.rnav button:hover {
+  color: #fd0;
+}
+.rnav li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.rnav .fa {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.global-modal {
+  visibility: hidden;
+}
+
+.global-modal_contents {
+  background: #FFF;
+  -webkit-box-shadow: 0 0 8px 2px rgba(182, 182, 182, 0.75);
+  -moz-box-shadow: 0 0 8px 2px rgba(182,182,182, 0.75);
+  -o-box-shadow: 0 0 8px 2px rgba(182,182,182,0.75);
+  box-shadow: 0 0 8px 2px rgba(182, 182, 182, 0.75);
+  width: 50%;
+  position: absolute;
+  left: 42%;
+  margin-left: -16%;
+  top: 15%;
+  min-height: 450px;
+  z-index: 9999;
+  font-size: 32px;
+  opacity: .8;
+  border-radius: 5%;
+}
+
+.global-modal-header h3{
+  color: #34495E;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+.global-modal-header .mobile-close{
+  display: none;
+}
+.global-modal-header span{
+  font-weight: 200;
+}
+.global-modal-body{
+  width: 100%;
+}
+.global-modal-body p{
+  color: #34495E;
+  line-height: 23px;
+  text-align: center;
+}
+
+.global-modal_contents h1 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: block;
+  font-size: 32px;
+}
+
+.global-modal_close {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  text-decoration: none;
+  display: none;
+}
+
+.global-modal-show {
+  visibility: visible;
+}
+
+.global-modal-transition {
+  -webkit-transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.global-modal-show .global-modal-transition {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+@media (max-width: 1139px){
+  .global-modal p{
+    text-align: center;
+  }
+
+}
+@media(max-width: 1027px){
+  .global-modal-header h3{
+    font-size: 18px;
+  }
+}
+@media (max-width : 767px) {
+  
+  .global-modal_contents {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    height: 20%;
+  }
+  .global-modal-header h3{
+    font-size: 22px;
+  }
+  .global-modal-header .mobile-close{
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    curson: pointer;
+  }
+  .global-modal_close {
+    display: block;
+  }
+  
+  .global-modal-transition {
+    -webkit-transform: translateX(-0) translateY(150%);
+    -moz-transform: translateX(-0) translateY(150%);
+    -ms-transform: translateX(-0) translateY(150%);
+    transform: translateX(-0) translateY(150%);
+  }
+  
+}
+@media (max-width: 495px){
+  .global-modal-header h3{
+    font-size: 18px;
+  }
+}
+@media (max-width: 415px){
+  .global-modal-header h3{
+    font-size: 15px;
+  }
+}
