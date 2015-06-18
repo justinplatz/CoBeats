@@ -173,21 +173,27 @@ $(window).keydown(function(e) {
       //   break;  
       case 1:
         lib = "A";
+        $("html").css("background-color","#222");
         break;
       case 2:
         lib = "B";
+        $("html").css("background-color","#BE90D4");
         break;
       case 3:
         lib = "C";
+        $("html").css("background-color","#6BB9F0");
         break;
       case 4:
         lib = "D";
+        $("html").css("background-color","#86E2D5");
         break;
       case 5:
         lib = "E";
+        $("html").css("background-color","#DCC6E0");
         break;
       case 6:
         lib = "F";
+        $("html").css("background-color","#ECF0F1");
         break;
     }
     console.log("lib is set to " + lib);
@@ -201,8 +207,6 @@ $(window).keydown(function(e) {
         }
       }
       $(".active").css("color",getRandomColor());
-
-
   }
   else if (key == 32) {
     if (record || play){
