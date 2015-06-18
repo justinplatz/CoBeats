@@ -161,6 +161,45 @@ function startTimer(){
   },10);
 }
 
+var themes = {
+  A:
+  {
+    background: "#222", 
+    seeker: "", 
+    dots: ""
+  },
+  B:
+  {
+    background: "#BE90D4", 
+    seeker: "", 
+    dots: ""
+  },
+  C:
+  {
+    background: "#6BB9F0", 
+    seeker: "", 
+    dots: ""
+  },
+  D:
+  {
+    background: "#86E2D5", 
+    seeker: "", 
+    dots: ""
+  },
+  E:
+  {
+    background: "#DCC6E0", 
+    seeker: "", 
+    dots: ""
+  },
+  F:
+  {
+    background: "#ECF0F1", 
+    seeker: "", 
+    dots: ""
+  }
+
+}; 
 // Catch all keyboard presses
 $(window).keydown(function(e) {
   key = (e.keyCode) ? e.keyCode : e.which;
@@ -173,27 +212,27 @@ $(window).keydown(function(e) {
       //   break;  
       case 1:
         lib = "A";
-        $("html").css("background-color","#222");
+        $("html").css("background-color",themes.A.background);
         break;
       case 2:
         lib = "B";
-        $("html").css("background-color","#BE90D4");
+        $("html").css("background-color",themes.B.background);
         break;
       case 3:
         lib = "C";
-        $("html").css("background-color","#6BB9F0");
+        $("html").css("background-color",themes.C.background);
         break;
       case 4:
         lib = "D";
-        $("html").css("background-color","#86E2D5");
+        $("html").css("background-color",themes.D.background);
         break;
       case 5:
         lib = "E";
-        $("html").css("background-color","#DCC6E0");
+        $("html").css("background-color",themes.E.background);
         break;
       case 6:
         lib = "F";
-        $("html").css("background-color","#ECF0F1");
+        $("html").css("background-color",themes.F.background);
         break;
     }
     console.log("lib is set to " + lib);
