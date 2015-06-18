@@ -267,7 +267,7 @@ var SOUNDS = {
   'j':"/prism-2.mp3"  ,
   'k':"/pinwheel.mp3",
   'l':"/zig-zag.mp3",
-  'z':,"/flash-3.mp3"
+  'z':"/flash-3.mp3",
   'x':"/wipe.mp3",
   'c':"/splits.mp3" ,
   'v':"/piston-3.mp3",
