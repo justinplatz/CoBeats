@@ -538,6 +538,8 @@ function subscribeTo(chan){
 					}	
 					makeSongArray();
 					break;
+				case "trash":
+					trash();
 				}
 	        }
         },
@@ -617,6 +619,7 @@ function trash(){
       }
     }
   });
+  publishCoBeat('trash', "trash");
 }
 
 
