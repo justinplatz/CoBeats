@@ -199,12 +199,19 @@ var themes = {
   }
 
 }; 
+
+
+function swap(one, two) {
+    document.getElementById(one).style.display = 'block';
+    document.getElementById(two).style.display = 'none';
+}
+
 // Catch all keyboard presses
 $(window).keydown(function(e) {
   key = (e.keyCode) ? e.keyCode : e.which;
   $('.key.k' + key).addClass('active');
 
-  if(key >= 48 && key <=57){
+  if(key >= 48 && key <=57){ //1-9
     switch(key - 48){
       // case 0:
       //   lib = "Z";
@@ -212,26 +219,45 @@ $(window).keydown(function(e) {
       case 1:
         lib = "A";
         $("html").css("background-color",themes.A.background);
+            swap("hex", "ring");
+            swap("hex", "twist");
+            swap("hex", "spin");
         break;
       case 2:
         lib = "B";
         $("html").css("background-color",themes.B.background);
+            swap("ring", "hex");
+            swap("ring", "twist");
+            swap("ring", "spin");
         break;
       case 3:
         lib = "C";
         $("html").css("background-color",themes.C.background);
+            swap("twist", "ring");
+            swap("twist", "hex");
+            swap("twist", "spin");
+
         break;
       case 4:
         lib = "D";
         $("html").css("background-color",themes.D.background);
+            swap("spin", "ring");
+            swap("spin", "hex");
+            swap("spin", "twist");
         break;
       case 5:
         lib = "E";
         $("html").css("background-color",themes.E.background);
+            swap("spin", "ring");
+            swap("spin", "hex");
+            swap("spin", "twist");
         break;
       case 6:
         lib = "F";
         $("html").css("background-color",themes.F.background);
+            swap("hex", "ring");
+            swap("hex", "twist");
+            swap("hex", "spin");
         break;
     }
     console.log("lib is set to " + lib);
@@ -418,56 +444,6 @@ function getRandomColor() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var globalModal = $('.global-modal');
-    $( ".btn-green-flat-trigger" ).on( "click", function(e) {
-      e.preventDefault();
-      $( globalModal ).toggleClass('global-modal-show');
-    });
-    $( ".overlay" ).on( "click", function() {
-      $( globalModal ).toggleClass('global-modal-show');
-    });
-    $( ".global-modal_close" ).on( "click", function() {
-      $( globalModal ).toggleClass('global-modal-show');
-    });
-    $(".mobile-close").on("click", function(){
-      $( globalModal ).toggleClass('global-modal-show');
-    });
-
 ///////////////////////////
 // PubNub Collaborations //
 ///////////////////////////
@@ -515,3 +491,57 @@ function publishCoBeat(type, data){
 	    callback : function(m){console.log(m)}
 	});
 }
+
+
+
+
+
+var globalModal = $('.global-modal');
+    $( ".btn-green-flat-trigger" ).on( "click", function(e) {
+      e.preventDefault();
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $( ".overlay" ).on( "click", function() {
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $( ".global-modal_close" ).on( "click", function() {
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $(".mobile-close").on("click", function(){
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+
+
+var globalModal2 = $('.global-modal2');
+    $( ".btn-red-flat-trigger2" ).on( "click", function(e) {
+      e.preventDefault();
+      $( globalModal2 ).toggleClass('global-modal2-show');
+    });
+    $( ".overlay" ).on( "click", function() {
+      $( globalModal2 ).toggleClass('global-modal2-show');
+    });
+    $( ".global-modal2_close" ).on( "click", function() {
+      $( globalModal2 ).toggleClass('global-modal2-show');
+    });
+    $(".mobile-close2").on("click", function(){
+      $( globalModal2 ).toggleClass('global-modal2-show');
+    });
+
+
+
+
+$(".mat-input").focus(function(){
+  $(this).parent().addClass("is-active is-completed");
+});
+
+$(".mat-input").focusout(function(){
+  if($(this).val() === "")
+    $(this).parent().removeClass("is-completed");
+  $(this).parent().removeClass("is-active");
+})
+
+
+
+
+
+

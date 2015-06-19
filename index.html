@@ -65,7 +65,7 @@
 
      <li>
       <a href='#'>
-          <button id="#" onClick="" class="btn-green-flat-trigger"><i class="fa fa-music"></i>Song</button>
+          <button id="#" onClick="" class="btn-red-flat-trigger2"><i class="fa fa-music"></i>Song</button>
       </a>
     </li> 
   
@@ -85,10 +85,33 @@
      <p>[A-Z] = Instrument</p>
      <p>[Space] = Record / Stop</p>
 
-     <h1>Button Controls:</h1>
-     <p>[1-6] = Library</p>
-     <p>[A-Z] = Instrument</p>
-     <p>[Space] = Record / Stop</p>
+
+     </div>
+   </div>
+ </div>
+</div>
+
+
+<div class="global-modal2">
+   <div class="overlay2"></div>
+   <div class="global-modal2_contents modal2-transition">
+    <div class="global-modal2-header">
+      <span class="mobile-close2"> X </span>
+    </div>
+    <div class="global-modal2-body" style="font-family: 'Open Sans', sans-serif;">
+
+       <div class="mat-div">
+          <label for="song-name" class="mat-label">Song Name</label>
+          <input type="text" class="mat-input" id="song-name">
+        </div>
+        <div class="mat-div">
+          <label for="your-name" class="mat-label">Your Name</label>
+          <input type="text" class="mat-input" id="your-name">
+        </div>
+
+     <div class="btn-red-flat-trigger2 button">
+        <p>Go</p>
+      </div>
 
      </div>
    </div>
@@ -251,16 +274,88 @@
 	
 	</div>
 	
-	<div class="container" style="  position: absolute;
-	  left: 35vw;
-	  top: 15vh;
-	  z-index: -1;">
-	  <div class="hexagon green"></div>
+	<div class="container" id="hex" style="position: absolute; left: 35vw; top: 15vh; z-index: -1;">
+	  
+    <div class="hexagon green"></div>
 	  <div class="hexagon red"></div>
 	  <div class="hexagon blue"></div>
 	  <div class="hexagon purple"></div>
 	  <div class="hexagon yellow"></div>
+
 	</div>
+
+  <div id ="ring" style="display:none; z-index: -1;position:absolute; top: 15%;left: 50%;">
+   
+      <div class="circle one"><div id="one"></div></div>
+      <div class="circle two"><div id="two"></div></div>
+      <div class="circle three"><div id="three"></div></div>
+      <div class="circle four"><div id="four"></div></div>
+      <div class="circle five"><div id="five"></div></div>
+      <div class="circle six"><div id="six"></div></div>
+      <div class="circle seven"><div id="seven"></div></div>
+
+  </div>
+   
+
+<div id = "twist" style="display:none; z-index: -1;position:absolute; top: 20%;left: 50%;">
+  <div class="center"><div id="stage" class="stage">
+    <div id="u-1">
+    <div class="trap" id="tr-1"></div>
+    <div class="trap" id="tr-2"></div>
+    <div class="trap" id="tr-3"></div>
+    <div class="trap" id="tr-4"></div>
+    <div class="trap" id="tr-5"></div>
+    </div>
+    <div id="u-2">  
+    <div class="trap2" id="tr-6"></div>
+    <div class="trap2" id="tr-7"></div>
+    <div class="trap2" id="tr-8"></div>
+    <div class="trap2" id="tr-9"></div>
+    <div class="trap2" id="tr-10"></div>
+    </div>
+     <div id="u-3">  
+    <div class="trap3" id="tr-11"></div>
+    <div class="trap3" id="tr-12"></div>
+    <div class="trap3" id="tr-13"></div>
+    <div class="trap3" id="tr-14"></div>
+    <div class="trap3" id="tr-15"></div>
+    </div>
+     <div id="u-4">  
+    <div class="trap4" id="tr-16"></div>
+    <div class="trap4" id="tr-17"></div>
+    <div class="trap4" id="tr-18"></div>
+    <div class="trap4" id="tr-19"></div>
+    <div class="trap4" id="tr-20"></div>
+    </div>
+     <div id="u-5">  
+    <div class="trap5" id="tr-21"></div>
+    <div class="trap5" id="tr-22"></div>
+    <div class="trap5" id="tr-23"></div>
+    <div class="trap5" id="tr-24"></div>
+    <div class="trap5" id="tr-25"></div>
+    </div>
+     <div id="u-6">  
+    <div class="trap6" id="tr-26"></div>
+    <div class="trap6" id="tr-27"></div>
+    <div class="trap6" id="tr-28"></div>
+    <div class="trap6" id="tr-29"></div>
+    <div class="trap6" id="tr-30"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div id="spin" style="display:none; z-index: -1;position:absolute; top: 20%;left: 50%;">
+<div class="center" id="seis"></div>
+<div class="center" id="cinco"></div>
+<div class="center" id="quatro"></div>  
+<div class="center" id="tres"></div>       
+<div class="center" id="dos"></div>    
+<div class="center" id="uno"></div>
+</div>
+
+
+
 	<script src="http://cdn.pubnub.com/pubnub-3.7.10.min.js"></script>
 	<script src="main.js"></script>
 </body>
