@@ -6,8 +6,15 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>        
-<h1 id="songName"> </h1>
+<body>
+
+<button id="songButton" onClick="" class="btn-red-flat-trigger2 en"><i class="fa fa-music" style="padding-right: 10px;"></i><h1 id="songName"> </h1>
+</button>
+
+
+
+
+
 <h1 style="position: absolute;right: 10px;top: 0;"> Users: </h1>
 <ul id="userList" style="position: absolute;right: 10px;font-size: 24px;top: 32px;list-style: none; z-index: -1; text-align: right;">
 
@@ -56,6 +63,12 @@
 
     <li>
       <a href='#'>
+          <button id="trash"><i class="fa fa-trash-o"></i>Trash</button>
+      </a>
+    </li>
+
+    <li>
+      <a href='#'>
           <button id="#" onClick="saveToParse(SoundArray)"><i class="fa fa-cloud"></i>Save</button>
       </a>
     </li> 
@@ -67,9 +80,9 @@
     </li> 
 
      <li>
-      <a href='#'>
+    <!--   <a href='#'>
           <button id="#" onClick="" class="btn-red-flat-trigger2"><i class="fa fa-music"></i>Song</button>
-      </a>
+      </a> -->
     </li> 
   
   </ul>
