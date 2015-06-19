@@ -14,7 +14,7 @@ var SongLen = 1000;
 var kit     = 'A';
 var record  = false;
 var play    = false;
-var startTime = 0;
+var startTime = 0;http://kevingleason.me/CoBeats/#
 var hours   = 0;
 var mins    = 0;
 var seconds = 0;
@@ -82,7 +82,7 @@ $('#stop').click(function(){
     	makeSongArray();
 		SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
     	publishCoBeat('stop', SongLen);
-    	publishCoBeat('riff', SongArray);
+    	publishCoBeat('riff', SoundArray);
 		record = false;
 
 	}
@@ -302,7 +302,7 @@ $(window).keydown(function(e) {
           makeSongArray();
 		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
           publishCoBeat('stop', SongLen);
-          publishCoBeat('riff', SongArray);
+          publishCoBeat('riff', SoundArray);
           record = false;
         }
       play = false;
