@@ -209,7 +209,7 @@ var themes = {
   },
   E:
   {
-    background: "#DCC6E0", 
+    background: "#81CFE0", 
     seeker: "", 
     dots: ""
   },
@@ -243,6 +243,9 @@ $(window).keydown(function(e) {
             swap("hex", "ring");
             swap("hex", "twist");
             swap("hex", "spin");
+            swap("hex", "circ");
+            swap("hex", "atom");
+
         break;
       case 2:
         lib = "B";
@@ -250,6 +253,9 @@ $(window).keydown(function(e) {
             swap("ring", "hex");
             swap("ring", "twist");
             swap("ring", "spin");
+            swap("ring", "circ");
+            swap("ring", "atom");
+
         break;
       case 3:
         lib = "C";
@@ -257,6 +263,9 @@ $(window).keydown(function(e) {
             swap("twist", "ring");
             swap("twist", "hex");
             swap("twist", "spin");
+            swap("twist", "circ");
+            swap("twist", "atom");
+
 
         break;
       case 4:
@@ -265,20 +274,30 @@ $(window).keydown(function(e) {
             swap("spin", "ring");
             swap("spin", "hex");
             swap("spin", "twist");
+            swap("spin", "circ");
+            swap("spin", "atom");
+
         break;
       case 5:
         lib = "E";
         $("html").css("background-color",themes.E.background);
-            swap("spin", "ring");
-            swap("spin", "hex");
-            swap("spin", "twist");
+            swap("circ", "ring");
+            swap("circ", "hex");
+            swap("circ", "twist");
+            swap("circ", "spin");
+            swap("circ", "atom");
+
         break;
       case 6:
         lib = "F";
         $("html").css("background-color",themes.F.background);
-            swap("hex", "ring");
-            swap("hex", "twist");
-            swap("hex", "spin");
+            swap("atom", "ring");
+            swap("atom", "twist");
+            swap("atom", "spin");
+            swap("atom", "circ");
+            swap("atom", "hex");
+
+
         break;
     }
     console.log("lib is set to " + lib);
