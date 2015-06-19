@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>        
-
+<h1 id="songName"> </h1>
   <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
   <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>  
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -16,14 +16,6 @@
   	Parse.initialize("8h7EqFtIOzritaD2lrssaAq0DdXpdwk83afH1KUS", "HEO3lR1rgo2NSW6rjiz6IzaNsFDIOJ8hL8QiAyGr");
   </script>
 
-<!-- 	<div id="controls">
-		<button id="start">Start</button>
-		<button id="stop">Stop</button>
-		<button id="reset">Reset</button>
-		<button id="#" onClick="saveToParse(SoundArray)">Save</button>
-		<button id="#" onClick="Playback(SoundArray)">Play</button>
-	</div>
-	 -->
 
 
 <div class='snav' id="controls" class='en'>
@@ -114,9 +106,9 @@
           <input type="text" class="mat-input" id="your-name">
         </div>
 
-     <div class="btn-red-flat-trigger2 button">
+     <button class="btn-red-flat-trigger2 button" id="submit" onclick="submitInfo()">
         <p>Go</p>
-      </div>
+      </button>
 
      </div>
    </div>

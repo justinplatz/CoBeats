@@ -497,6 +497,7 @@ function getRandomColor() {
 // PubNub Collaborations //
 ///////////////////////////
 UUID = PUBNUB.uuid();
+var chan = "cobeats";
 
 pubnub = PUBNUB({                          
     publish_key   : 'pub-c-f83b8b34-5dbc-4502-ac34-5073f2382d96',
@@ -504,9 +505,9 @@ pubnub = PUBNUB({
     uuid: UUID
 });
 
-function pubInit(){
-	pubnub.subscribe({                                     
-        channel : "cobeats",
+function subscribeTo(chan){
+  pubnub.subscribe({                                     
+        channel : chan,
         message : function(m){
 	        if (m.uuid != UUID){
 				switch(m.type){
@@ -536,15 +537,35 @@ function pubInit(){
 	        console.log(m);
         }
     });
+  document.getElementById("songName").innerHTML = chan;
+
+}
+
+function pubInit(){
+  subscribeTo(chan);
 }
 pubInit();
 
 function publishCoBeat(type, data){
 	pubnub.publish({
-	    channel: 'cobeats',        
+	    channel: chan,        
 	    message: {type:type, data:data, uuid:UUID},
 	    callback : function(m){console.log(m)}
 	});
+}
+
+
+
+////submitting info from the GO button
+function submitInfo(){
+  var song = document.getElementById("song-name").value;
+  var user = document.getElementById("your-name").value;
+  console.log(song + user);
+  pubnub.unsubscribe(chan);
+  chan = (song=="") ? "cobeats" : song;
+  UUID = (user=="") ? UUID : user;
+  console.log(UUID);
+  subscribeTo(chan);
 }
 
 var globalModal = $('.global-modal');
