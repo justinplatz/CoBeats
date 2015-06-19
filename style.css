@@ -132,10 +132,9 @@ button:focus .key{
 }
 
 #timer {
-  font-size:4em;
+  font-size:24px;
   margin:0 auto;
   width:1000px;
-  text-align: center;
 }
 
 
