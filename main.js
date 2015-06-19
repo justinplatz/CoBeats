@@ -40,7 +40,6 @@ function Playback() {
         }
         if (idx >= SongArray.length) { 
 	        var x = SongLen - (Date.now()-startTime);
-	        console.log(x);
 	        setTimeout(function(){
 		        if (!record) {
 		        	startTime = Date.now();
@@ -79,7 +78,7 @@ $('#stop').click(function(){
 	if (record){ // If record? If first record?
     	SoundArray.sort(compare);
     	makeSongArray();
-		SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
+		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
     	publishCoBeat('stop', SongLen);
     	publishCoBeat('riff', SoundArray);
 		record = false;
@@ -88,7 +87,9 @@ $('#stop').click(function(){
 	play = false;
 	stopClock();
 	makeSongArray();
-
+  $('#mins').html('00:');
+  $('#seconds').html('00.');
+  $('#millis').html('00');
   saveToParse();
 });
 
@@ -316,7 +317,7 @@ $(window).keydown(function(e) {
           record = false;
           SoundArray.sort(compare);
           makeSongArray();
-		      SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
+		      SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
           publishCoBeat('stop', SongLen);
           publishCoBeat('riff', SoundArray);
           saveToParse();
