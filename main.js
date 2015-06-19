@@ -500,7 +500,7 @@ var firstName = ["gifted", "grooving", "slow", "jiggy", "soulful", "swaggy", "pu
 var lastName = ["kazoo", "triangle", "forte", "sax", "flute", "banjo", "oboe", "piano", "drums"];
 
 UUID = makeName();
-var chan = "CoBeats";
+var chan = "test1234";
 var userArray = [];
 
 function makeName(){
@@ -594,7 +594,7 @@ function submitInfo(){
   var song = document.getElementById("song-name").value;
   console.log(song);
   pubnub.unsubscribe({channel:chan});
-  chan = (song=="") ? "cobeats" : song;
+  chan = (song=="") ? chan : song;
   subscribeTo(chan);
   userArray.length = 0;
 }
