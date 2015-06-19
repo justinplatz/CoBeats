@@ -606,6 +606,13 @@ function trash(){
   SongArray.length  = 0;
   for (prop in SongMap) { if (SongMap.hasOwnProperty(prop)) { delete SongMap[prop]; } }
   SongLen = 1000;
+  record  = false;
+  play    = false;
+  startTime = 0;
+  hours   = 0;
+  mins    = 0;
+  seconds = 0;
+  millis  = 0;
   
   var SoundObject = Parse.Object.extend("Sounds");
   var query = new Parse.Query(SoundObject);
