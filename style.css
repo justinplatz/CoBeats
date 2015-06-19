@@ -350,6 +350,19 @@ button:focus .key{
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 
 
+#songButton{
+  font-size: 32px;
+  color: #444;
+
+}
+
+
+#songButton h1{
+  font-size: 32px;
+  display:inline
+
+}
+
 /* LTR CSS */
 .snav.en {
   left: 0;
@@ -385,7 +398,7 @@ button:focus .key{
 .snav ul {
   list-style: none;
 }
-.snav * {
+.snav *, #songButton {
   margin: 0;
   padding: 0;
   outline: 0;
@@ -409,7 +422,7 @@ button:focus .key{
   color: #444;
 }
 
-.snav button:hover {
+.snav button:hover, #songButton:hover{
   color: #fd0;
 }
 .snav li a {
