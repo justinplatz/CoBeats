@@ -496,8 +496,18 @@ function getRandomColor() {
 ///////////////////////////
 // PubNub Collaborations //
 ///////////////////////////
-UUID = PUBNUB.uuid();
-var chan = "cobeats";
+var firstName = ["gifted", "grooving", "slow", "jiggy", "soulful", "swaggy", "punk", "rock", "jazzy", "DJ", "Chance The", "A$AP", "Big", "lil", "kid", "Mr"];
+var lastName = ["kazoo", "triangle", "forte", "sax", "flute", "banjo", "oboe", "piano", "drums"];
+
+UUID = makeName();
+var chan = "CoBeats";
+var userArray = [];
+
+function makeName(){
+  var first = firstName[Math.floor(Math.random()*firstName.length)];
+  var last = lastName[Math.floor(Math.random()*lastName.length)];
+  return first + "-" + last;
+}
 
 pubnub = PUBNUB({                          
     publish_key   : 'pub-c-f83b8b34-5dbc-4502-ac34-5073f2382d96',
@@ -535,6 +545,19 @@ function subscribeTo(chan){
         },
         connect: function(m){
 	        console.log(m);
+        },
+        presence: function(m){
+          if (m.action == "join"){
+            if (userArray.indexOf(m.uuid) == -1){
+              userArray.push(m.uuid);
+            }
+          } else if (m.action == "leave"){
+            var idx = userArray.indexOf(m.uuid);
+            if (idx != -1){
+              userArray.splice(idx, 1);
+            }
+          }
+          writeUsers();
         }
     });
   document.getElementById("songName").innerHTML = chan;
@@ -555,17 +578,25 @@ function publishCoBeat(type, data){
 }
 
 
+function writeUsers(){
+  var list = document.getElementById("userList");
+  var html = "";
+  for (var i = 0; i < userArray.length; i++) {
+    html += "<li>" + userArray[i] + "</li>";
+  }
+  list.innerHTML = html;
+}
+
+
 
 ////submitting info from the GO button
 function submitInfo(){
   var song = document.getElementById("song-name").value;
-  var user = document.getElementById("your-name").value;
-  console.log(song + user);
-  pubnub.unsubscribe(chan);
+  console.log(song);
+  pubnub.unsubscribe({channel:chan});
   chan = (song=="") ? "cobeats" : song;
-  UUID = (user=="") ? UUID : user;
-  console.log(UUID);
   subscribeTo(chan);
+  userArray.length = 0;
 }
 
 var globalModal = $('.global-modal');

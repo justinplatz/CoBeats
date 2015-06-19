@@ -8,7 +8,13 @@
 </head>
 <body>        
 <h1 id="songName"> </h1>
-  <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
+<h1 style="position: absolute;right: 10px;top: 0;"> Users: </h1>
+<ul id="userList" style="position: absolute;right: 10px;font-size: 24px;top: 32px;list-style: none; z-index: -1; text-align: right;">
+
+</ul>
+
+  <!-- <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script> -->
+  <script src="http://cdn.pubnub.com/pubnub.js"></script>
   <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>  
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -100,10 +106,6 @@
        <div class="mat-div">
           <label for="song-name" class="mat-label">Song Name</label>
           <input type="text" class="mat-input" id="song-name">
-        </div>
-        <div class="mat-div">
-          <label for="your-name" class="mat-label">Your Name</label>
-          <input type="text" class="mat-input" id="your-name">
         </div>
 
      <button class="btn-red-flat-trigger2 button" id="submit" onclick="submitInfo()">
