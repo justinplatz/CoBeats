@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="em">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>        
+
+  <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
+  <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>  
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script>
+  	Parse.initialize("8h7EqFtIOzritaD2lrssaAq0DdXpdwk83afH1KUS", "HEO3lR1rgo2NSW6rjiz6IzaNsFDIOJ8hL8QiAyGr");
+  </script>
+
+<!-- 	<div id="controls">
+		<button id="start">Start</button>
+		<button id="stop">Stop</button>
+		<button id="reset">Reset</button>
+		<button id="#" onClick="saveToParse(SoundArray)">Save</button>
+		<button id="#" onClick="Playback(SoundArray)">Play</button>
+	</div>
+	 -->
+
+
+<div class='snav' id="controls" class='en'>
+  <ul>
+    <li>
+      <a href='#'>
+      
+        <button id="start"><i class="fa fa-microphone"></i>Record</button>
+      </a>
+    </li>
+      <li>
+      <a href='#'>
+          <button id="#" onClick="Playback()"><i class="fa fa-play"></i>Play</button>
+      </a>
+    </li>
+     <li>
+      <a href='#'>
+          <button id="stop"><i class="fa fa-stop"></i>Stop</button>
+      </a>
+    </li>
+ 
+     <li>
+      <a href='#'>
+          <button id="reset"><i class="fa fa-times"></i>Reset</button>
+      </a>
+    </li>
+
+    <li>
+      <a href='#'>
+          <button id="#" onClick="saveToParse(SoundArray)"><i class="fa fa-cloud"></i>Save</button>
+      </a>
+    </li> 
+
+    <li>
+      <a href='#'>
+          <button id="#" onClick="" class="btn-green-flat-trigger"><i class="fa fa-question-circle"></i>Help</button>
+      </a>
+    </li> 
+
+     <li>
+      <a href='#'>
+<<<<<<< HEAD
+          <button id="#" onClick="" class="btn-red-flat-trigger2"><i class="fa fa-music"></i>Song</button>
+=======
+          <button id="#" onClick="" class="btn-green-flat-trigger"><i class="fa fa-music"></i>Song</button>
+>>>>>>> Modal and help
+      </a>
+    </li> 
+  
+  </ul>
+  
+</div>
+
+<div class="global-modal">
+   <div class="overlay"></div>
+   <div class="global-modal_contents modal-transition">
+    <div class="global-modal-header">
+      <span class="mobile-close"> X </span>
+    </div>
+    <div class="global-modal-body" style="font-family: 'Open Sans', sans-serif;">
+    <h1>Key Board Controls:</h1>
+     <p>[1-6] = Library</p>
+     <p>[A-Z] = Instrument</p>
+     <p>[Space] = Record / Stop</p>
+
+<<<<<<< HEAD
+
+     </div>
+   </div>
+ </div>
+</div>
+
+
+<div class="global-modal2">
+   <div class="overlay2"></div>
+   <div class="global-modal2_contents modal2-transition">
+    <div class="global-modal2-header">
+      <span class="mobile-close2"> X </span>
+    </div>
+    <div class="global-modal2-body" style="font-family: 'Open Sans', sans-serif;">
+
+       <div class="mat-div">
+          <label for="song-name" class="mat-label">Song Name</label>
+          <input type="text" class="mat-input" id="song-name">
+        </div>
+        <div class="mat-div">
+          <label for="your-name" class="mat-label">Your Name</label>
+          <input type="text" class="mat-input" id="your-name">
+        </div>
+
+     <div class="btn-red-flat-trigger2 button">
+        <p>Go</p>
+      </div>
+=======
+     <h1>Button Controls:</h1>
+     <p>[1-6] = Library</p>
+     <p>[A-Z] = Instrument</p>
+     <p>[Space] = Record / Stop</p>
+>>>>>>> Modal and help
+
+     </div>
+   </div>
+ </div>
+</div>
+
+
+<div class='rnav' style="right: 1em; text-align:right; font-size:24px;" class='en'>
+<<<<<<< HEAD
+  
+</div>
+=======
+>>>>>>> Modal and help
+  
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="timer">
+		<span id="mins">00:</span>
+		<span id="seconds">00.</span> 
+		<span id="millis">00</span>  
+	</div>
+	
+	<div id="seekBar">
+    <canvas id="canvas" width="800" height="100" style="margin: 0 auto;"></canvas>
+  </div>
+	
+<div class="key-wrapper" class="display-animation" style="text-align:center">
+  <ul class="row">
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .3s;animation-delay: .3s;"> <li class="key k49">1</li>
+    </button>
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;"> <li class="key k50">2</li>
+    </button>
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;"><li class="key k51">3</li>
+    </button>
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;"><li class="key k52">4</li>
+    </button>
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;"> <li class="key k53">5</li>
+    </button>
+
+    <button type="button" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;"><li class="key k54">6</li>
+    </button>
+
+
+
+  </ul>
+
+
+  <ul class="row">
+
+    <button type="button" onclick="playSound(lib, 'q')" class = "move" style="-webkit-animation-delay: .3s;animation-delay: .3s;"> <li class="key k81">q</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'w')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;"> <li class="key k87">w</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'e')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;"><li class="key k69">e</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'r')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;"><li class="key k82">r</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 't')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;"><li class="key k84">t</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'y')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;"><li class="key k89">y</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'u')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;"><li class="key k85">u</li>
+   </button>
+
+    <button type="button" onclick="playSound(lib, 'i')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;"><li class="key k73">i</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'o')" class = "move" style="-webkit-animation-delay: 1.1s;animation-delay: 1.1s;"><li class="key k79">o</li>
+    </button>
+
+    <button type="button" onclick="playSound(lib, 'p')" class = "move" style="-webkit-animation-delay: 1.2s;animation-delay: 1.2s;"><li class="key k80">p</li>
+    </button>
+
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound(lib, 'a')" class = "move" style="-webkit-animation-delay: .3s;animation-delay: .3s;"><li class="key k65">a</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 's')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;">
+    <li class="key k83">s</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'd')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;">
+    <li class="key k68">d</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'f')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;">
+    <li class="key k70">f</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'g')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k71">g</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'h')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;">
+    <li class="key k72">h</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'j')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;">
+    <li class="key k74">j</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'k')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;">
+    <li class="key k75">k</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'l')" class = "move" style="-webkit-animation-delay: 1.1s;animation-delay: 1.1s;">
+    <li class="key k76">l</li>
+    </button>
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound(lib, 'z')" class = "move" style="-webkit-animation-delay: .4s;animation-delay: .4s;">
+    <li class="key k90">z</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'x')" class = "move" style="-webkit-animation-delay: .5s;animation-delay: .5s;">
+    <li class="key k88">x</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'c')" class = "move" style="-webkit-animation-delay: .6s;animation-delay: .6s;">
+    <li class="key k67">c</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'v')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k86">v</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'b')" class = "move" style="-webkit-animation-delay: .8s;animation-delay: .8s;">
+    <li class="key k66">b</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'n')" class = "move" style="-webkit-animation-delay: .9s;animation-delay: .9s;">
+    <li class="key k78">n</li>
+    </button>
+    <button type="button" onclick="playSound(lib, 'm')" class = "move" style="-webkit-animation-delay: 1s;animation-delay: 1s;">
+    <li class="key k77">m</li>
+    </button>
+  </ul>
+
+  <ul class="row">
+    <button type="button" onclick="playSound(lib, ' ')" class = "move" style="-webkit-animation-delay: .7s;animation-delay: .7s;">
+    <li class="key k32"></li>
+    </button>
+  </ul>
+</div>
+
+	<div id="audios">
+	
+	</div>
+	
+	<div class="container" id="hex" style="position: absolute; left: 35vw; top: 15vh; z-index: -1;">
+	  
+    <div class="hexagon green"></div>
+	  <div class="hexagon red"></div>
+	  <div class="hexagon blue"></div>
+	  <div class="hexagon purple"></div>
+	  <div class="hexagon yellow"></div>
+
+	</div>
+
+  <div id ="ring" style="display:none; z-index: -1;position:absolute; top: 15%;left: 50%;">
+   
+      <div class="circle one"><div id="one"></div></div>
+      <div class="circle two"><div id="two"></div></div>
+      <div class="circle three"><div id="three"></div></div>
+      <div class="circle four"><div id="four"></div></div>
+      <div class="circle five"><div id="five"></div></div>
+      <div class="circle six"><div id="six"></div></div>
+      <div class="circle seven"><div id="seven"></div></div>
+
+  </div>
+   
+
+<div id = "twist" style="display:none; z-index: -1;position:absolute; top: 20%;left: 50%;">
+  <div class="center"><div id="stage" class="stage">
+    <div id="u-1">
+    <div class="trap" id="tr-1"></div>
+    <div class="trap" id="tr-2"></div>
+    <div class="trap" id="tr-3"></div>
+    <div class="trap" id="tr-4"></div>
+    <div class="trap" id="tr-5"></div>
+    </div>
+    <div id="u-2">  
+    <div class="trap2" id="tr-6"></div>
+    <div class="trap2" id="tr-7"></div>
+    <div class="trap2" id="tr-8"></div>
+    <div class="trap2" id="tr-9"></div>
+    <div class="trap2" id="tr-10"></div>
+    </div>
+     <div id="u-3">  
+    <div class="trap3" id="tr-11"></div>
+    <div class="trap3" id="tr-12"></div>
+    <div class="trap3" id="tr-13"></div>
+    <div class="trap3" id="tr-14"></div>
+    <div class="trap3" id="tr-15"></div>
+    </div>
+     <div id="u-4">  
+    <div class="trap4" id="tr-16"></div>
+    <div class="trap4" id="tr-17"></div>
+    <div class="trap4" id="tr-18"></div>
+    <div class="trap4" id="tr-19"></div>
+    <div class="trap4" id="tr-20"></div>
+    </div>
+     <div id="u-5">  
+    <div class="trap5" id="tr-21"></div>
+    <div class="trap5" id="tr-22"></div>
+    <div class="trap5" id="tr-23"></div>
+    <div class="trap5" id="tr-24"></div>
+    <div class="trap5" id="tr-25"></div>
+    </div>
+     <div id="u-6">  
+    <div class="trap6" id="tr-26"></div>
+    <div class="trap6" id="tr-27"></div>
+    <div class="trap6" id="tr-28"></div>
+    <div class="trap6" id="tr-29"></div>
+    <div class="trap6" id="tr-30"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div id="spin" style="display:none; z-index: -1;position:absolute; top: 20%;left: 50%;">
+<div class="center" id="seis"></div>
+<div class="center" id="cinco"></div>
+<div class="center" id="quatro"></div>  
+<div class="center" id="tres"></div>       
+<div class="center" id="dos"></div>    
+<div class="center" id="uno"></div>
+</div>
+
+
+
+	<script src="http://cdn.pubnub.com/pubnub-3.7.10.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
