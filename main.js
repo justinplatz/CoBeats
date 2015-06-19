@@ -14,7 +14,7 @@ var SongLen = 1000;
 var kit     = 'A';
 var record  = false;
 var play    = false;
-var startTime = 0;http://kevingleason.me/CoBeats/#
+var startTime = 0;
 var hours   = 0;
 var mins    = 0;
 var seconds = 0;
@@ -29,7 +29,6 @@ function Playback() {
   }
   else if (!record){
     startTime = Date.now();
-    //startTimer();
   }
   play = true;
 
@@ -89,6 +88,8 @@ $('#stop').click(function(){
 	play = false;
 	stopClock();
 	makeSongArray();
+
+  saveToParse();
 });
 
 $('#reset').click(function(){
@@ -106,8 +107,10 @@ $('#reset').click(function(){
 	
 	SoundArray.length = 0;
 	SongLen = 1000;
+  makeSongArray();
 	publishCoBeat('stop', SongLen);
 	publishCoBeat('riff', SoundArray);
+  saveToParse();
 	clearCanvas();
 });
 
@@ -140,13 +143,6 @@ function compare(a,b) {
   return 0;
 }
 
-function saveToParse(SoundArray) {
-  if (record) return;
-  var ArrayObject = Parse.Object.extend("Sounds");
-  var arrayObject = new ArrayObject();
-  arrayObject.addUnique("SoundAndTime", SoundArray);
-  arrayObject.save();
-}
 
 // The Time Counter
 function startTimer(){
@@ -317,12 +313,13 @@ $(window).keydown(function(e) {
   else if (key == 16){ // Shift Bar
     if (record || play){
         if (record){ // If record? If first record?
+          record = false;
           SoundArray.sort(compare);
           makeSongArray();
-		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
+		      SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : Date.now() - startTime;
           publishCoBeat('stop', SongLen);
           publishCoBeat('riff', SoundArray);
-          record = false;
+          saveToParse();
         }
       play = false;
       stopClock();
@@ -500,7 +497,7 @@ var firstName = ["gifted", "grooving", "slow", "jiggy", "soulful", "swaggy", "pu
 var lastName = ["kazoo", "triangle", "forte", "sax", "flute", "banjo", "oboe", "piano", "drums"];
 
 UUID = makeName();
-var chan = "test1234";
+var chan = "coBeats";
 var userArray = [];
 
 function makeName(){
@@ -544,7 +541,7 @@ function subscribeTo(chan){
 	        }
         },
         connect: function(m){
-	        console.log(m);
+          loadFromParse()
         },
         presence: function(m){
           if (m.action == "join"){
@@ -577,6 +574,16 @@ function publishCoBeat(type, data){
 	});
 }
 
+////submitting info from the GO button
+function submitInfo(){
+  var song = document.getElementById("song-name").value;
+  console.log(song);
+  pubnub.unsubscribe({channel:chan});
+  chan = (song=="") ? chan : song;
+  subscribeTo(chan);
+  userArray.length  = 0;
+  //Clear SongMap and SoundArray.
+}
 
 function writeUsers(){
   var list = document.getElementById("userList");
@@ -587,16 +594,83 @@ function writeUsers(){
   list.innerHTML = html;
 }
 
+/////////////////////
+// Parse Functions //
+/////////////////////
+
+function trash(){
+  SoundArray.length = 0;
+  SongArray.length  = 0;
+  for (prop in SongMap) { if (SongMap.hasOwnProperty(prop)) { delete SongMap[prop]; } }
+  SongLen = 1000;
+  
+  var SoundObject = Parse.Object.extend("Sounds");
+  var query = new Parse.Query(SoundObject);
+  query.equalTo("songName", chan);
+  query.find({
+    success: function(song) {
+      if (song.length) {
+        for (var i=0; i<song.length; i++){
+          song[i].destroy({});
+        }
+      }
+    }
+  });
+}
 
 
-////submitting info from the GO button
-function submitInfo(){
-  var song = document.getElementById("song-name").value;
-  console.log(song);
-  pubnub.unsubscribe({channel:chan});
-  chan = (song=="") ? chan : song;
-  subscribeTo(chan);
-  userArray.length = 0;
+function loadFromParse(){
+  SoundArray.length = 0;
+  for (prop in SongMap) { if (SongMap.hasOwnProperty(prop)) { delete SongMap[prop]; } }
+  
+  var SoundObject = Parse.Object.extend("Sounds");
+  var query = new Parse.Query(SoundObject);
+  query.equalTo("songName", chan);
+  query.find({
+    success: function(song) {
+      if (song.length) {
+        for (var i=0; i<song.length; i++){
+          if (song[i].get('userName')==UUID){
+            SoundArray = song[i].get('SoundAndTime');
+          } else {
+            SongMap[song[i].get('userName')] = song[i].get('SoundAndTime');
+          }
+        }
+      }
+      makeSongArray();
+      SongLen = (SongArray.length > 0) ? SongArray[SongArray.length-1].time + 100 : 1000;
+    }
+  });
+}
+
+function saveToParse() {
+  if (record) return;
+
+  var SoundObject = Parse.Object.extend("Sounds");
+  // Assume Parse.Object myPost was previously created.
+  var query = new Parse.Query(SoundObject);
+    query.equalTo("songName", chan);
+    query.equalTo("userName", UUID);
+    query.first({
+    success: function(song) {
+      if (song) {
+         song.save(null, {
+            success: function (songSave) {
+                songSave.set("SoundAndTime", SoundArray);
+                songSave.save();
+            }
+        });
+      }
+      else{
+        var soundObject = new SoundObject();
+        soundObject.set("SoundAndTime", SoundArray);
+        soundObject.set("userName", UUID);
+        soundObject.set("songName", chan);
+        soundObject.save();
+      }
+     
+    }
+  });
 }
 
 var globalModal = $('.global-modal');
