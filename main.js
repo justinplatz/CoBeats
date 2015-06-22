@@ -82,7 +82,7 @@ function stopIt(){
           record = false;
           SoundArray.sort(compare);
           makeSongArray();
-		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
+		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+250 : 1000;
           publishCoBeat('stop', SongLen);
           publishCoBeat('riff', SoundArray);
           saveToParse();
@@ -650,7 +650,7 @@ function loadFromParse(){
         }
       }
       makeSongArray();
-      SongLen = (SongArray.length > 0) ? SongArray[SongArray.length-1].time + 100 : 1000;
+      SongLen = (SongArray.length > 0) ? SongArray[SongArray.length-1].time+250 : 1000;
     }
   });
 }
