@@ -24,7 +24,7 @@ var UUID = "";
 
 function Playback() {
   if (play) {
-	  play = false;
+	  stopIt();
 	  return;
   }
   else if (!record){
@@ -61,35 +61,54 @@ function Playback() {
 
 // Button Click Functions
 $('#record').click(function(){
-	if (record || play) return;
-	hours   = 0;
-	mins    = 0;
-	seconds = 0;
-	$('#mins').html('00:');
-	$('#seconds').html('00.');
-	$('#millis').html('00');
-	record  = true;
-	startTime = Date.now();
-	Playback();
-	startTimer();
+	recIt();
 });
 
+function stopIt(){
+	if (record || play){
+        if (record){ // If record? If first record?
+          record = false;
+          SoundArray.sort(compare);
+          makeSongArray();
+		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
+          publishCoBeat('stop', SongLen);
+          publishCoBeat('riff', SoundArray);
+          saveToParse();
+        }
+      play = false;
+      stopClock();
+    }
+	$('#mins').html('00:');
+	$('#seconds').html('00.');
+	$('#millis').html('00');	
+}
+
+function recIt(){
+	if (modalOpen()) {
+      return;
+    }
+    if (record || play){
+	    $("#record").css("color","#444");
+        stopIt();
+        return;
+    }
+    else{
+	  $("#record").css("color","red");
+      hours   = 0;
+      mins    = 0;
+      seconds = 0;
+      $('#mins').html('00:');
+      $('#seconds').html('00.');
+      $('#millis').html('00');
+      record  = true;
+      startTime = Date.now();
+      Playback();
+      startTimer();
+    }
+}
+
 $('#stop').click(function(){
-	if (record){ // If record? If first record?
-    	SoundArray.sort(compare);
-    	makeSongArray();
-		 SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
-    	publishCoBeat('stop', SongLen);
-    	publishCoBeat('riff', SoundArray);
-		record = false;
-	}
-	play = false;
-	stopClock();
-	makeSongArray();
-  $('#mins').html('00:');
-  $('#seconds').html('00.');
-  $('#millis').html('00');
-  saveToParse();
+	stopIt();
 });
 
 $('#reset').click(function(){
@@ -179,43 +198,12 @@ function startTimer(){
 }
 
 var themes = {
-  A:
-  {
-    background: "#222", 
-    seeker: "", 
-    dots: ""
-  },
-  B:
-  {
-    background: "#BE90D4", 
-    seeker: "", 
-    dots: ""
-  },
-  C:
-  {
-    background: "#6BB9F0", 
-    seeker: "", 
-    dots: ""
-  },
-  D:
-  {
-    background: "#86E2D5", 
-    seeker: "", 
-    dots: ""
-  },
-  E:
-  {
-    background: "#81CFE0", 
-    seeker: "", 
-    dots: ""
-  },
-  F:
-  {
-    background: "#ECF0F1", 
-    seeker: "", 
-    dots: ""
-  }
-
+  A: { background: "#222"},
+  B: { background: "#BE90D4" },
+  C: { background: "#6BB9F0" },
+  D: { background: "#86E2D5" },
+  E: { background: "#81CFE0" },
+  F: { background: "#ECF0F1" }
 }; 
 
 function swap(one, two) {
@@ -292,8 +280,6 @@ $(window).keydown(function(e) {
             swap("atom", "spin");
             swap("atom", "circ");
             swap("atom", "hex");
-
-
         break;
     }
   }
@@ -311,35 +297,7 @@ $(window).keydown(function(e) {
 
   }
   else if (key == 16){ // Shift Bar
-    if (modalOpen()) {
-      return;
-    }
-    if (record || play){
-        if (record){ // If record? If first record?
-          record = false;
-          SoundArray.sort(compare);
-          makeSongArray();
-		      SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
-          publishCoBeat('stop', SongLen);
-          publishCoBeat('riff', SoundArray);
-          saveToParse();
-        }
-      play = false;
-      stopClock();
-      return;
-    }
-    else{
-      hours   = 0;
-      mins    = 0;
-      seconds = 0;
-      $('#mins').html('00:');
-      $('#seconds').html('00.');
-      $('#millis').html('00');
-      record  = true;
-      startTime = Date.now();
-      Playback();
-      startTimer();
-    }
+  	recIt();  
   }
   else if (key == 32) { // Space Bar
     if (modalOpen()) {
@@ -348,23 +306,11 @@ $(window).keydown(function(e) {
     e.preventDefault(); 
 
     if (record || play){
-      if (record){ // If record? If first record?
-        record = false;
-        SoundArray.sort(compare);
-        makeSongArray();
-        SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
-        publishCoBeat('stop', SongLen);
-        publishCoBeat('riff', SoundArray);
-        saveToParse();
-      }
-      play = false;
-      stopClock();
-      return;
+    	stopIt();
     } 
     else
   	 Playback();
   }
-
   else //not a valid key press
     console.log("Invalid key");
 });
