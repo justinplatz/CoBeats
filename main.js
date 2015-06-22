@@ -35,7 +35,11 @@ var lib = "A";
 var UUID = "";
 
 function Playback() {
-  if (play) {
+  if (play && record) {
+	  recIt();
+	  return;
+  }
+  else if (play) {
 	  stopIt();
 	  return;
   }
@@ -79,6 +83,7 @@ $('#record').click(function(){
 function stopIt(){
 	if (record || play){
         if (record){ // If record? If first record?
+	      $("#record").css("color","#444");
           record = false;
           SoundArray.sort(compare);
           makeSongArray();
