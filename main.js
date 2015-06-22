@@ -215,7 +215,8 @@ var themes = {
   C: { background: "#6BB9F0" },
   D: { background: "#86E2D5" },
   E: { background: "#81CFE0" },
-  F: { background: "#ECF0F1" }
+  F: { background: "#ECF0F1" },
+  G: { background: "#6B8CFF" }
 }; 
 
 function swap(one, two) {
@@ -241,6 +242,7 @@ $(window).keydown(function(e) {
             swap("hex", "spin");
             swap("hex", "circ");
             swap("hex", "atom");
+            swap("hex", "game");
 
         break;
       case 2:
@@ -251,6 +253,7 @@ $(window).keydown(function(e) {
             swap("ring", "spin");
             swap("ring", "circ");
             swap("ring", "atom");
+            swap("ring", "game");
 
         break;
       case 3:
@@ -261,6 +264,7 @@ $(window).keydown(function(e) {
             swap("twist", "spin");
             swap("twist", "circ");
             swap("twist", "atom");
+            swap("twist", "game");
 
 
         break;
@@ -272,6 +276,7 @@ $(window).keydown(function(e) {
             swap("spin", "twist");
             swap("spin", "circ");
             swap("spin", "atom");
+            swap("spin", "game");
 
         break;
       case 5:
@@ -282,6 +287,7 @@ $(window).keydown(function(e) {
             swap("circ", "twist");
             swap("circ", "spin");
             swap("circ", "atom");
+            swap("circ", "game");
 
         break;
       case 6:
@@ -292,15 +298,19 @@ $(window).keydown(function(e) {
             swap("atom", "spin");
             swap("atom", "circ");
             swap("atom", "hex");
+            swap("atom", "game");
+
         break;
       case 7:
       lib = "G";
-      $("html").css("background-color",themes.F.background);
-          swap("atom", "ring");
-          swap("atom", "twist");
-          swap("atom", "spin");
-          swap("atom", "circ");
-          swap("atom", "hex");
+      $("html").css("background-color",themes.G.background);
+          swap("game", "ring");
+          swap("game", "twist");
+          swap("game", "spin");
+          swap("game", "circ");
+          swap("game", "hex");
+          swap("game", "atom");
+
         break;
     }
   }
@@ -740,4 +750,55 @@ $(".mat-input").focusout(function(){
   if($(this).val() === "")
     $(this).parent().removeClass("is-completed");
   $(this).parent().removeClass("is-active");
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.clear();
+var marioSteps = 1;
+setInterval(function() {
+  marioSteps++
+  console.log(marioSteps);
+  if (marioSteps > 2) {
+    marioSteps = 0;
+  }
+  
+  if (marioSteps == 1) {
+    $('.mario').css('background-position', '0px')
+  } else if (marioSteps == 2) {
+    $('.mario').css('background-position', '68px')
+    $('.mario').css('left', '-8px')
+  } else {
+    $('.mario').css('background-position', '120px');
+    $('.mario').css('left', '4px')
+  }
+}, 80)
+
+$('html, body').on('keydown', function(e) {
+  if (e.keyCode == 32) {
+    $('.mario').addClass('mario_jump');
+    setTimeout(function() {
+      $('.mario').removeClass('mario_jump')
+    }, 800)
+  }
 })
