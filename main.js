@@ -281,6 +281,15 @@ $(window).keydown(function(e) {
             swap("atom", "circ");
             swap("atom", "hex");
         break;
+      case 7:
+      lib = "G";
+      $("html").css("background-color",themes.F.background);
+          swap("atom", "ring");
+          swap("atom", "twist");
+          swap("atom", "spin");
+          swap("atom", "circ");
+          swap("atom", "hex");
+        break;
     }
   }
   else if(key >= 65 && key <= 90){ // Letter Press
