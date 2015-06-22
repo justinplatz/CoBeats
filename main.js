@@ -392,7 +392,7 @@ var SOUNDS = {
  };
 
 function playSound(kit, sound){
-  console.log(sound+  " was pressed");
+  //console.log(sound+  " was pressed");
   if (typeof(sound)=="number"){
     key = String.fromCharCode(sound).toLowerCase();
   } 
@@ -524,7 +524,9 @@ function makeName(){
 pubnub = PUBNUB({                          
     publish_key   : 'pub-c-f83b8b34-5dbc-4502-ac34-5073f2382d96',
     subscribe_key : 'sub-c-34be47b2-f776-11e4-b559-0619f8945a4f',
-    uuid: UUID
+    uuid: UUID,
+    heartbeat: 30,
+    heartbeat_interval: 10
 });
 
 function subscribeTo(chan){
@@ -561,17 +563,18 @@ function subscribeTo(chan){
           loadFromParse()
         },
         presence: function(m){
+	      console.log(m);
           if (m.action == "join"){
             if (userArray.indexOf(m.uuid) == -1){
               userArray.push(m.uuid);
             }
-          } else if (m.action == "leave"){
+          } else if (m.action == "leave" || m.action == "timeout"){
             var idx = userArray.indexOf(m.uuid);
             if (idx != -1){
               userArray.splice(idx, 1);
             }
           }
-          writeUsers();
+        writeUsers();
         }
     });
   document.getElementById("songName").innerHTML = chan;
@@ -589,14 +592,14 @@ function publishCoBeat(type, data){
 	pubnub.publish({
 	    channel: chan,        
 	    message: {type:type, data:data, uuid:UUID},
-	    callback : function(m){console.log(m)}
+	    callback : function(m){console.log(m)},
 	});
 }
 
 ////submitting info from the GO button
 function submitInfo(){
   var song = document.getElementById("song-name").value;
-  console.log(song);
+  //console.log(song);
   pubnub.unsubscribe({channel:chan});
   chan = (song=="") ? chan : song;
   subscribeTo(chan);
@@ -760,30 +763,10 @@ $(".mat-input").focusout(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 console.clear();
 var marioSteps = 1;
 setInterval(function() {
   marioSteps++
-  console.log(marioSteps);
   if (marioSteps > 2) {
     marioSteps = 0;
   }
