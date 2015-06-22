@@ -452,7 +452,7 @@ var playBar = {
 
 var mySong = {
 	beats: 1,
-	colors: ['#2ECC71','#446CB3','#1F3A93','#F9BF3B','#DCC6E0'],
+	colors: ['#2ECC71','#446CB3','#1F3A93','#F9BF3B','#DCC6E0', '#F89406', '#03A678', '#9B59B6', '#DB0A5B'],
 	radius: 10,
 	getX : function(beat){
 		return beat.time/SongLen * canvas.width;
@@ -468,7 +468,7 @@ var mySong = {
 		var yVal = this.getY(pos);
 		var playing = this.playing(beat);
 		var rad  = playing ? this.radius+4 : this.radius;
-		var col  = playing ? '#F64747' : this.colors[pos];
+		var col  = playing ? '#F64747' : this.colors[pos%this.colors.length];
 		ctx.beginPath();
 		ctx.arc(xVal, yVal, rad, 0, Math.PI*2, false);
 		ctx.fillStyle = col;
