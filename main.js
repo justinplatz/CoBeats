@@ -307,7 +307,8 @@ $(window).keydown(function(e) {
 			publishCoBeat('beat', beat);
         }
       }
-      $(".active").css("color",getRandomColor());
+      $(".active").css("color",getRandomColor);
+
   }
   else if (key == 16){ // Shift Bar
     if (modalOpen()) {
@@ -371,6 +372,8 @@ $(window).keydown(function(e) {
 $(window).keyup(function(e) {
   key = (e.keyCode) ? e.keyCode : e.which;
   $('.key.k' + key).removeClass('active');
+  $('.key.k' + key).css("border-color", getRandomColor());
+
 });
 
 // Play sounds on button press
@@ -449,7 +452,7 @@ var playBar = {
 
 var mySong = {
 	beats: 1,
-	colors: ['#66CC99','#F00','#0F0','#00F'],
+	colors: ['#2ECC71','#446CB3','#1F3A93','#F9BF3B','#DCC6E0'],
 	radius: 10,
 	getX : function(beat){
 		return beat.time/SongLen * canvas.width;
@@ -464,8 +467,8 @@ var mySong = {
 		var xVal = this.getX(beat);
 		var yVal = this.getY(pos);
 		var playing = this.playing(beat);
-		var rad  = playing ? this.radius+3 : this.radius;
-		var col  = playing ? 'yellow' : this.colors[pos];
+		var rad  = playing ? this.radius+4 : this.radius;
+		var col  = playing ? '#F64747' : this.colors[pos];
 		ctx.beginPath();
 		ctx.arc(xVal, yVal, rad, 0, Math.PI*2, false);
 		ctx.fillStyle = col;
