@@ -612,7 +612,7 @@ function writeUsers(){
   var html = "";
   for (var i = 0; i < userArray.length; i++) {
     if (userArray[i] == UUID) {
-      html += "<li style='color:#F5AB35' id='user'><i class='fa fa-user' style='color:#F5AB35' id='user'></i>" + userArray[i] + "</li>";
+      html += "<li style='color:#F5AB35' id='user'><i class='fa fa-user' style='color:#F5AB35' id='user'></i> " + userArray[i] + "</li>";
     }
     else{
       html += "<li>" + userArray[i] + "</li>";
