@@ -78,7 +78,7 @@ $('#stop').click(function(){
 	if (record){ // If record? If first record?
     	SoundArray.sort(compare);
     	makeSongArray();
-		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
+		 SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
     	publishCoBeat('stop', SongLen);
     	publishCoBeat('riff', SoundArray);
 		record = false;
@@ -107,10 +107,10 @@ $('#reset').click(function(){
 	
 	SoundArray.length = 0;
 	SongLen = 1000;
-  makeSongArray();
+	makeSongArray();
 	publishCoBeat('stop', SongLen);
 	publishCoBeat('riff', SoundArray);
-  saveToParse();
+	saveToParse();
 	clearCanvas();
 });
 
@@ -556,6 +556,8 @@ function subscribeTo(chan){
 					}	
 					makeSongArray();
 					break;
+				case "trash":
+					trash();
 				}
 	        }
         },
@@ -623,11 +625,24 @@ function writeUsers(){
 // Parse Functions //
 /////////////////////
 
+function doTrash(){
+	trash();
+	publishCoBeat('trash', "trash");
+}
+
 function trash(){
   SoundArray.length = 0;
   SongArray.length  = 0;
   for (prop in SongMap) { if (SongMap.hasOwnProperty(prop)) { delete SongMap[prop]; } }
   SongLen = 1000;
+  record  = false;
+  play    = false;
+  startTime = 0;
+  hours   = 0;
+  mins    = 0;
+  seconds = 0;
+  millis  = 0;
+  stopClock();
   
   var SoundObject = Parse.Object.extend("Sounds");
   var query = new Parse.Query(SoundObject);
