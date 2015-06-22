@@ -6,6 +6,18 @@ $(document).ready(function() {
   });
 });
 
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) { 
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
 // Instantiate Global Variables
 var SoundArray = [];
 var SongArray = [];
@@ -70,7 +82,7 @@ function stopIt(){
           record = false;
           SoundArray.sort(compare);
           makeSongArray();
-		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
+		  SongLen = SongArray.length ? SongArray[SongArray.length-1].time+250 : 1000;
           publishCoBeat('stop', SongLen);
           publishCoBeat('riff', SoundArray);
           saveToParse();
@@ -410,13 +422,21 @@ var playBar = {
 
 var mySong = {
 	beats: 1,
-	colors: ['#2ECC71','#446CB3','#1F3A93','#F9BF3B','#DCC6E0', '#F89406', '#03A678', '#9B59B6', '#DB0A5B'],
+	colors: ['rgba(47, 204, 112, {0})', 'rgba(68, 109, 179, {0})', 'rgba(31, 58, 148, {0})', 'rgba(250, 192, 59, {0})', 
+			 'rgba(221, 198, 225, {0})','rgba(248, 147, 5, {0})', 'rgba(3, 166, 120, {0})', 'rgba(155, 88, 181, {0})', 
+			 'rgba(220, 11, 91, {0})'],
 	radius: 10,
 	getX : function(beat){
 		return beat.time/SongLen * canvas.width;
 	},
 	getY : function(pos){
 		return canvas.height/(this.beats+1) * (pos+1);
+	},
+	getOpac : function(beat){
+		var strt = 'a'.charCodeAt(0);
+		var code = beat.key.charCodeAt(0);
+		var oVal = (code-strt)/(26.0*1.75);
+		return 1.00 - oVal;
 	},
 	playing: function(beat){
 		return (playBar.getX() > this.getX(beat)-this.radius && playBar.getX() < this.getX(beat)+this.radius);
@@ -426,7 +446,7 @@ var mySong = {
 		var yVal = this.getY(pos);
 		var playing = this.playing(beat);
 		var rad  = playing ? this.radius+4 : this.radius;
-		var col  = playing ? '#F64747' : this.colors[pos%this.colors.length];
+		var col  = playing ? '#F64747' : this.colors[pos%this.colors.length].format(this.getOpac(beat));
 		ctx.beginPath();
 		ctx.arc(xVal, yVal, rad, 0, Math.PI*2, false);
 		ctx.fillStyle = col;
@@ -639,7 +659,7 @@ function loadFromParse(){
         }
       }
       makeSongArray();
-      SongLen = (SongArray.length > 0) ? SongArray[SongArray.length-1].time + 100 : 1000;
+      SongLen = (SongArray.length > 0) ? SongArray[SongArray.length-1].time+250 : 1000;
     }
   });
 }
