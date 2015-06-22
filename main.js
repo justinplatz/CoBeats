@@ -299,7 +299,7 @@ $(window).keydown(function(e) {
             swap("atom", "circ");
             swap("atom", "hex");
             swap("atom", "game");
-
+ 
         break;
       case 7:
       lib = "G";
@@ -795,7 +795,7 @@ setInterval(function() {
 }, 80)
 
 $('html, body').on('keydown', function(e) {
-  if (e.keyCode == 32) {
+  if (e.keyCode == 32 || e.keyCode == 16) {
     $('.mario').addClass('mario_jump');
     setTimeout(function() {
       $('.mario').removeClass('mario_jump')
