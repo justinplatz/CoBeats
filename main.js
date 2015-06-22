@@ -369,6 +369,8 @@ $(window).keydown(function(e) {
     console.log("Invalid key");
 });
 
+
+
 $(window).keyup(function(e) {
   key = (e.keyCode) ? e.keyCode : e.which;
   $('.key.k' + key).removeClass('active');
@@ -408,6 +410,7 @@ var SOUNDS = {
  };
 
 function playSound(kit, sound){
+  console.log(sound+  " was pressed");
   if (typeof(sound)=="number"){
     key = String.fromCharCode(sound).toLowerCase();
   } 

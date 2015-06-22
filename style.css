@@ -394,6 +394,7 @@ button:focus .key{
   z-index: 9999;
   font-size: 3em;
   font-family: 'Open Sans', sans-serif;
+  width: 150px;
 }
 .snav ul {
   list-style: none;
