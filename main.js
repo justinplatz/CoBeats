@@ -60,7 +60,7 @@ function Playback() {
 }
 
 // Button Click Functions
-$('#start').click(function(){
+$('#record').click(function(){
 	if (record || play) return;
 	hours   = 0;
 	mins    = 0;
@@ -82,7 +82,6 @@ $('#stop').click(function(){
     	publishCoBeat('stop', SongLen);
     	publishCoBeat('riff', SoundArray);
 		record = false;
-
 	}
 	play = false;
 	stopClock();
@@ -297,9 +296,8 @@ $(window).keydown(function(e) {
 
         break;
     }
-    console.log("lib is set to " + lib);
   }
-  else if(key >= 65 && key <= 90){
+  else if(key >= 65 && key <= 90){ // Letter Press
       playSound(lib, e.keyCode);
       if (record){
         var elapsed = Date.now() - startTime;
@@ -312,6 +310,9 @@ $(window).keydown(function(e) {
       $(".active").css("color",getRandomColor());
   }
   else if (key == 16){ // Shift Bar
+    if (modalOpen()) {
+      return;
+    }
     if (record || play){
         if (record){ // If record? If first record?
           record = false;
@@ -340,14 +341,31 @@ $(window).keydown(function(e) {
     }
   }
   else if (key == 32) { // Space Bar
-	e.preventDefault();  
-	Playback();
-	return;
-  }
-  else
-    console.log("Invalid key");
+    if (modalOpen()) {
+      return;
+    }
+    e.preventDefault(); 
 
- 
+    if (record || play){
+      if (record){ // If record? If first record?
+        record = false;
+        SoundArray.sort(compare);
+        makeSongArray();
+        SongLen = SongArray.length ? SongArray[SongArray.length-1].time+100 : 1000;
+        publishCoBeat('stop', SongLen);
+        publishCoBeat('riff', SoundArray);
+        saveToParse();
+      }
+      play = false;
+      stopClock();
+      return;
+    } 
+    else
+  	 Playback();
+  }
+
+  else //not a valid key press
+    console.log("Invalid key");
 });
 
 $(window).keyup(function(e) {
@@ -562,6 +580,8 @@ function subscribeTo(chan){
 
 }
 
+
+
 function pubInit(){
   subscribeTo(chan);
 }
@@ -583,14 +603,18 @@ function submitInfo(){
   chan = (song=="") ? chan : song;
   subscribeTo(chan);
   userArray.length  = 0;
-  //Clear SongMap and SoundArray.
 }
 
 function writeUsers(){
   var list = document.getElementById("userList");
   var html = "";
   for (var i = 0; i < userArray.length; i++) {
-    html += "<li>" + userArray[i] + "</li>";
+    if (userArray[i] == UUID) {
+      html += "<li style='color:#F5AB35' id='user'><i class='fa fa-user' style='color:#F5AB35' id='user'></i>" + userArray[i] + "</li>";
+    }
+    else{
+      html += "<li>" + userArray[i] + "</li>";
+    }
   }
   list.innerHTML = html;
 }
@@ -706,6 +730,10 @@ var globalModal2 = $('.global-modal2');
     });
 
 
+
+function modalOpen(){
+  return globalModal.hasClass('global-modal-show') || globalModal2.hasClass('global-modal2-show');
+}
 
 
 $(".mat-input").focus(function(){

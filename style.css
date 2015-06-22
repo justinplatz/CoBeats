@@ -573,8 +573,9 @@ button:focus .key{
 }
 .global-modal-body p{
   color: #34495E;
-  line-height: 23px;
+  line-height: 24px;
   text-align: center;
+  font-size: 24px;
 }
 
 .global-modal_contents h1 {
